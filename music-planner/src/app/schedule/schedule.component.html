@@ -1,0 +1,89 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="serviceType">
+        <th mat-header-cell *matHeaderCellDef>Service Type</th>
+        <td mat-cell *matCellDef="let element"> {{element.serviceType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orchestra1">
+        <th mat-header-cell *matHeaderCellDef>Orchestra 1</th>
+        <td mat-cell *matCellDef="let element"> {{element.orchestra1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orchestra2">
+        <th mat-header-cell *matHeaderCellDef>Orchestra 2</th>
+        <td mat-cell *matCellDef="let element"> {{element.orchestra2}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orchestra3">
+        <th mat-header-cell *matHeaderCellDef>Orchestra 3</th>
+        <td mat-cell *matCellDef="let element"> {{element.orchestra3}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orchestra4">
+        <th mat-header-cell *matHeaderCellDef>Orchestra 4</th>
+        <td mat-cell *matCellDef="let element"> {{element.orchestra4}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orchestra5">
+        <th mat-header-cell *matHeaderCellDef>Orchestra 5</th>
+        <td mat-cell *matCellDef="let element"> {{element.orchestra5}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="choir1">
+        <th mat-header-cell *matHeaderCellDef>Choir 1</th>
+        <td mat-cell *matCellDef="let element"> {{element.choir1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="choir2">
+        <th mat-header-cell *matHeaderCellDef>Choir 2</th>
+        <td mat-cell *matCellDef="let element"> {{element.choir2}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="choir3">
+        <th mat-header-cell *matHeaderCellDef>Choir 3</th>
+        <td mat-cell *matCellDef="let element"> {{element.choir3}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="choir4">
+        <th mat-header-cell *matHeaderCellDef>Choir 4</th>
+        <td mat-cell *matCellDef="let element"> {{element.choir4}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="congregationBS">
+        <th mat-header-cell *matHeaderCellDef>Before Service</th>
+        <td mat-cell *matCellDef="let element"> {{element.congregationBS}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="congregationOH">
+        <th mat-header-cell *matHeaderCellDef>Opening Hymn</th>
+        <td mat-cell *matCellDef="let element"> {{element.congregationOH}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="congregationRP">
+        <th mat-header-cell *matHeaderCellDef>Repentance</th>
+        <td mat-cell *matCellDef="let element"> {{element.congregationRP}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="congregationCM1">
+        <th mat-header-cell *matHeaderCellDef>Communion 1</th>
+        <td mat-cell *matCellDef="let element"> {{element.congregationCM1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="congregationCM2">
+        <th mat-header-cell *matHeaderCellDef>Communion 1</th>
+        <td mat-cell *matCellDef="let element"> {{element.congregationCM2}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<input type="file" (change)="handleFileInput($event)">
+<button mat-flat-button (click)="saveSchedule()">Save</button>
