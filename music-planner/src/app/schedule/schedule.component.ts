@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FormsModule } from '@angular/forms';
 
 export interface ServiceMusicPlan {
   date: Date;
@@ -28,12 +32,11 @@ interface HTMLInputEvent extends Event {
 @Component({
   selector: 'app-schedule',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule],
+  imports: [MatInputModule, MatButtonModule, MatDividerModule, MatGridListModule, MatFormFieldModule, FormsModule],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.css'
 })
 export class ScheduleComponent {
-  displayedColumns: string[] = ['date', 'serviceType', 'orchestra1', 'orchestra2', 'orchestra3', 'orchestra4', 'orchestra5', 'choir1', 'choir2', 'choir3', 'choir4', 'congregationBS', 'congregationOH', 'congregationRP', 'congregationCM1', 'congregationCM2'];
   dataSource: ServiceMusicPlan[] = [];
 
   fileContent: string | ArrayBuffer = '';
