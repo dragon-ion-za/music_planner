@@ -32,103 +32,14 @@
             </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Orchestra 1</mat-label>
-                <input matInput placeholder="Orchestra 1" [(ngModel)]="service.orchestra1">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Orchestra 2</mat-label>
-                <input matInput placeholder="Orchestra 2" [(ngModel)]="service.orchestra2">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Orchestra 3</mat-label>
-                <input matInput placeholder="Orchestra 3" [(ngModel)]="service.orchestra3">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Orchestra 4</mat-label>
-                <input matInput placeholder="Orchestra 4" [(ngModel)]="service.orchestra4">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Orchestra 5</mat-label>
-                <input matInput placeholder="Orchestra 5" [(ngModel)]="service.orchestra5">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Choir 1</mat-label>
-                <input matInput placeholder="Choir 1" [(ngModel)]="service.choir1">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Choir 2</mat-label>
-                <input matInput placeholder="Choir 2" [(ngModel)]="service.choir2">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Choir 3</mat-label>
-                <input matInput placeholder="Choir 3" [(ngModel)]="service.choir3">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Choir 4</mat-label>
-                <input matInput placeholder="Choir 4" [(ngModel)]="service.choir4">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Before Service</mat-label>
-                <input matInput placeholder="Before Service" [(ngModel)]="service.congregationBS">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Opening Hymn</mat-label>
-                <input matInput placeholder="Opening Hymn" [(ngModel)]="service.congregationOH">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Repentance</mat-label>
-                <input matInput placeholder="Repentance" [(ngModel)]="service.congregationRP">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Communion 1</mat-label>
-                <input matInput placeholder="Communion 1" [(ngModel)]="service.congregationCM1">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Communion 2</mat-label>
-                <input matInput placeholder="Communion 2" [(ngModel)]="service.congregationCM2">
-            </mat-form-field>
-        </mat-grid-tile>
+        @for (song of service.songs; track song.type) {
+            <mat-grid-tile>
+                <mat-form-field>
+                    <mat-label>{{song.type}}</mat-label>
+                    <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number">
+                </mat-form-field>
+            </mat-grid-tile>
+        }
     }
 
 </mat-grid-list>

@@ -9,20 +9,18 @@ import { FormsModule } from '@angular/forms';
 export interface ServiceMusicPlan {
   date: Date;
   serviceType: string;
-  orchestra1: string;
-  orchestra2: string;
-  orchestra3: string;
-  orchestra4: string;
-  orchestra5: string;
-  choir1: string;
-  choir2: string;
-  choir3: string;
-  choir4: string;
-  congregationBS: string;
-  congregationOH: string;
-  congregationRP: string;
-  congregationCM1: string;
-  congregationCM2: string;
+  songs: Song[];
+}
+
+export class Song {
+  type: string = '';
+  number: string = '';
+  conflicts: ConflictDetail[] = [];
+}
+
+export interface ConflictDetail {
+  date: string;
+  type: string;
 }
 
 interface HTMLInputEvent extends Event {
