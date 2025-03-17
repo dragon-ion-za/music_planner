@@ -19,7 +19,7 @@ export class Song {
 }
 
 export interface ConflictDetail {
-  date: string;
+  date: Date;
   type: string;
 }
 
@@ -46,9 +46,37 @@ export class ScheduleComponent {
     let self = this;
     fileReader.onloadend = function(x) {
       self.fileContent = fileReader.result ?? "N/A";
-      self.dataSource = JSON.parse(self.fileContent as string);
+      self.dataSource = JSON.parse(self.fileContent as string, self.reviveDate);
+
+      self.dataSource = self.dataSource.sort((x, y) =>  x.date > y.date ? 1 : x.date == y.date ? 0 : -1);
+      let startDate = self.dataSource[0].date;
+      let endDate = self.dataSource[self.dataSource.length - 1].date;
+
+      self.calculateConflicts(startDate, endDate);
     }
     fileReader.readAsText(file);
+  }
+
+  public checkForConflicts(e: Event, serviceDate: Date) {
+    let endDate = new Date(serviceDate);
+    endDate.setMonth(endDate.getMonth() + 2);
+    let startDate = new Date(serviceDate);
+    startDate.setMonth(startDate.getMonth() - 2);
+
+    this.calculateConflicts(startDate, endDate);
+  }
+
+  private calculateConflicts(startDate: Date, endDate: Date) {
+    let filteredSchedule = this.dataSource.filter(x => x.date >= startDate && x.date <= endDate);
+    let mappedSongs: any[] = filteredSchedule.map(x => x.songs.map(y => <any>{ date: x.date, number: y.number, type: y.type })).flatMap(x => x);
+    filteredSchedule.forEach(x => {
+      x.songs.forEach(y => {
+        y.conflicts = [];
+        mappedSongs.filter(z => z.number == y.number && z.type != y.type).forEach(z => {
+          y.conflicts.push({date: z.date, type: z.type});
+        });
+      });
+    });
   }
 
   public saveSchedule() : void {
@@ -56,5 +84,12 @@ export class ScheduleComponent {
     a.setAttribute('href', 'data:text/plain;charset=utf-u,'+encodeURIComponent(JSON.stringify(this.dataSource)));
     a.setAttribute('download', 'nac_schedule_new.json');
     a.click()
+  }
+
+  public reviveDate(key: string, value: any) {
+    // Matches strings like "2022-08-25T09:39:19.288Z"
+    const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+  
+    return typeof value === 'string' && isoDateRegex.test(value) ? new Date(value) : value
   }
 }

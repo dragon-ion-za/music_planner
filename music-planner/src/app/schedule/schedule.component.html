@@ -35,8 +35,8 @@
         @for (song of service.songs; track song.type) {
             <mat-grid-tile>
                 <mat-form-field>
-                    <mat-label>{{song.type}}</mat-label>
-                    <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number">
+                    <mat-label>{{song.type}} {{song.conflicts?.length ?? 0 > 0 ? 'cf' : 'nc'}}</mat-label>
+                    <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number" (change)="checkForConflicts($event, service.date)">
                 </mat-form-field>
             </mat-grid-tile>
         }
