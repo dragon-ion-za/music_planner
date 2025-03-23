@@ -21,7 +21,10 @@
         <mat-grid-tile>
             <mat-form-field>
                 <mat-label>Date</mat-label>
-                <input matInput placeholder="Date" [(ngModel)]="service.date">
+                <input matInput [matDatepicker]="picker" [(ngModel)]="service.date">
+                <mat-hint>YYYY/MM/DD</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </mat-grid-tile>
 
@@ -34,9 +37,10 @@
 
         @for (song of service.songs; track song.type) {
             <mat-grid-tile>
-                <mat-form-field>
-                    <mat-label>{{song.type}} {{song.conflicts?.length ?? 0 > 0 ? 'cf' : 'nc'}}</mat-label>
-                    <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number" (change)="checkForConflicts($event, service.date)">
+                <mat-form-field [class]="{'conflict': song.conflicts?.length ?? 0 > 0}">
+                    <mat-label>{{song.type}}</mat-label>
+                    <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number" (change)="checkForConflicts($event, service.date)"
+                        matTooltip="{{song.conflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.conflicts) : null}}">
                 </mat-form-field>
             </mat-grid-tile>
         }
@@ -45,4 +49,5 @@
 </mat-grid-list>
 
 <input type="file" (change)="handleFileInput($event)">
+<button mat-flat-button (click)="addDate()">Add</button>
 <button mat-flat-button (click)="saveSchedule()">Save</button>

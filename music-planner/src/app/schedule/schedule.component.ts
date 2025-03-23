@@ -5,6 +5,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import moment from 'moment';
 
 export interface ServiceMusicPlan {
   date: Date;
@@ -27,12 +32,28 @@ interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
+
 @Component({
   selector: 'app-schedule',
   standalone: true,
-  imports: [MatInputModule, MatButtonModule, MatDividerModule, MatGridListModule, MatFormFieldModule, FormsModule],
+  imports: [MatInputModule, MatButtonModule, MatDividerModule, MatGridListModule, MatFormFieldModule, FormsModule, MatTooltipModule, MatDatepickerModule],
   templateUrl: './schedule.component.html',
-  styleUrl: './schedule.component.css'
+  styleUrl: './schedule.component.css',
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class ScheduleComponent {
   dataSource: ServiceMusicPlan[] = [];
@@ -72,9 +93,11 @@ export class ScheduleComponent {
     filteredSchedule.forEach(x => {
       x.songs.forEach(y => {
         y.conflicts = [];
-        mappedSongs.filter(z => z.number == y.number && z.type != y.type).forEach(z => {
-          y.conflicts.push({date: z.date, type: z.type});
-        });
+        if (y.number !== '' && y.number !== 'N/A') {
+          mappedSongs.filter(z => z.number == y.number && z.type != y.type).forEach(z => {
+            y.conflicts.push({date: z.date, type: z.type});
+          });
+        }
       });
     });
   }
@@ -91,5 +114,28 @@ export class ScheduleComponent {
     const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
   
     return typeof value === 'string' && isoDateRegex.test(value) ? new Date(value) : value
+  }
+
+  public buildConflictsTooltip(conflicts: ConflictDetail[]) : string {
+    return conflicts.map(x => `${moment(x.date).format('YYYY-MM-DD')} - ${x.type}`).join('\n');
+  }
+
+  public addDate() : void {
+    this.dataSource.push({ date: new Date(), serviceType: '', songs: [
+      { type: 'orchestra1', number: 'N/A', conflicts: [] },
+      { type: 'orchestra2', number: 'N/A', conflicts: [] },
+      { type: 'orchestra3', number: 'N/A', conflicts: [] },
+      { type: 'orchestra4', number: 'N/A', conflicts: [] },
+      { type: 'orchestra5', number: 'N/A', conflicts: [] },
+      { type: 'choir1', number: 'N/A', conflicts: [] },
+      { type: 'choir2', number: 'N/A', conflicts: [] },
+      { type: 'choir3', number: 'N/A', conflicts: [] },
+      { type: 'choir4', number: 'N/A', conflicts: [] },
+      { type: 'congregationBS', number: 'N/A', conflicts: [] },
+      { type: 'congregationOH', number: 'N/A', conflicts: [] },
+      { type: 'congregationRP', number: 'N/A', conflicts: [] },
+      { type: 'congregationCM1', number: 'N/A', conflicts: [] },
+      { type: 'congregationCM2', number: 'N/A', conflicts: [] }
+    ] });
   }
 }
