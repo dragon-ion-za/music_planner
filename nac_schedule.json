@@ -11,7 +11,12 @@
             {
                 "type": "orchestra2",
                 "number": "e162",
-                "conflicts": []
+                "conflicts": [
+                    {
+                        "date": "2025-01-25T22:00:00.000Z",
+                        "type": "orchestra2"
+                    }
+                ]
             },
             {
                 "type": "orchestra3",
@@ -38,36 +43,8 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
+                        "date": "2025-01-08T00:00:00.000Z",
+                        "type": "choir1"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
@@ -108,40 +85,12 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
+                        "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
+                        "type": "choir2"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
@@ -178,44 +127,16 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir1"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir2"
+                    },
+                    {
+                        "date": "2025-01-08T00:00:00.000Z",
+                        "type": "choir3"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
@@ -248,38 +169,6 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir1"
                     },
@@ -290,6 +179,10 @@
                     {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir3"
+                    },
+                    {
+                        "date": "2025-01-08T00:00:00.000Z",
+                        "type": "choir4"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
@@ -318,38 +211,6 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir1"
                     },
@@ -364,6 +225,10 @@
                     {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir4"
+                    },
+                    {
+                        "date": "2025-01-08T00:00:00.000Z",
+                        "type": "congregationBS"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
@@ -388,38 +253,6 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir1"
                     },
@@ -438,6 +271,10 @@
                     {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationBS"
+                    },
+                    {
+                        "date": "2025-01-08T00:00:00.000Z",
+                        "type": "congregationOH"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
@@ -458,38 +295,6 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir1"
                     },
@@ -512,6 +317,10 @@
                     {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationOH"
+                    },
+                    {
+                        "date": "2025-01-08T00:00:00.000Z",
+                        "type": "congregationRP"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
@@ -528,38 +337,6 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir1"
                     },
@@ -586,6 +363,10 @@
                     {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationRP"
+                    },
+                    {
+                        "date": "2025-01-08T00:00:00.000Z",
+                        "type": "congregationCM1"
                     },
                     {
                         "date": "2025-01-08T00:00:00.000Z",
@@ -598,38 +379,6 @@
                 "number": "E1",
                 "conflicts": [
                     {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "choir1"
                     },
@@ -660,6 +409,10 @@
                     {
                         "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationCM1"
+                    },
+                    {
+                        "date": "2025-01-08T00:00:00.000Z",
+                        "type": "congregationCM2"
                     }
                 ]
             }
@@ -700,6 +453,10 @@
                 "conflicts": [
                     {
                         "date": "2025-01-05T00:00:00.000Z",
+                        "type": "choir1"
+                    },
+                    {
+                        "date": "2025-01-05T00:00:00.000Z",
                         "type": "choir2"
                     },
                     {
@@ -728,38 +485,6 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationCM2"
                     }
                 ]
@@ -774,6 +499,10 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
+                        "type": "choir2"
+                    },
+                    {
+                        "date": "2025-01-05T00:00:00.000Z",
                         "type": "choir3"
                     },
                     {
@@ -798,38 +527,6 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationCM2"
                     }
                 ]
@@ -848,6 +545,10 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
+                        "type": "choir3"
+                    },
+                    {
+                        "date": "2025-01-05T00:00:00.000Z",
                         "type": "choir4"
                     },
                     {
@@ -868,38 +569,6 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationCM2"
                     }
                 ]
@@ -922,6 +591,10 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
+                        "type": "choir4"
+                    },
+                    {
+                        "date": "2025-01-05T00:00:00.000Z",
                         "type": "congregationBS"
                     },
                     {
@@ -938,38 +611,6 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationCM2"
                     }
                 ]
@@ -996,6 +637,10 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
+                        "type": "congregationBS"
+                    },
+                    {
+                        "date": "2025-01-05T00:00:00.000Z",
                         "type": "congregationOH"
                     },
                     {
@@ -1008,38 +653,6 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationCM2"
                     }
                 ]
@@ -1070,6 +683,10 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
+                        "type": "congregationOH"
+                    },
+                    {
+                        "date": "2025-01-05T00:00:00.000Z",
                         "type": "congregationRP"
                     },
                     {
@@ -1078,38 +695,6 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationCM2"
                     }
                 ]
@@ -1144,42 +729,14 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
+                        "type": "congregationRP"
+                    },
+                    {
+                        "date": "2025-01-05T00:00:00.000Z",
                         "type": "congregationCM1"
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationCM1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
                         "type": "congregationCM2"
                     }
                 ]
@@ -1218,38 +775,10 @@
                     },
                     {
                         "date": "2025-01-05T00:00:00.000Z",
-                        "type": "congregationCM2"
+                        "type": "congregationCM1"
                     },
                     {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
+                        "date": "2025-01-05T00:00:00.000Z",
                         "type": "congregationCM2"
                     }
                 ]
@@ -1291,36 +820,8 @@
                         "type": "congregationCM1"
                     },
                     {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir1"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir2"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir3"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "choir4"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationBS"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationOH"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationRP"
-                    },
-                    {
-                        "date": "2025-01-08T00:00:00.000Z",
-                        "type": "congregationCM1"
+                        "date": "2025-01-05T00:00:00.000Z",
+                        "type": "congregationCM2"
                     }
                 ]
             }
@@ -1500,7 +1001,12 @@
             {
                 "type": "orchestra3",
                 "number": "e250",
-                "conflicts": []
+                "conflicts": [
+                    {
+                        "date": "2025-01-25T22:00:00.000Z",
+                        "type": "orchestra3"
+                    }
+                ]
             },
             {
                 "type": "orchestra4",
@@ -1576,7 +1082,12 @@
             {
                 "type": "orchestra2",
                 "number": "e207",
-                "conflicts": []
+                "conflicts": [
+                    {
+                        "date": "2025-04-01T22:00:00.000Z",
+                        "type": "orchestra1"
+                    }
+                ]
             },
             {
                 "type": "orchestra3",
@@ -1657,12 +1168,22 @@
             {
                 "type": "orchestra2",
                 "number": "e162",
-                "conflicts": []
+                "conflicts": [
+                    {
+                        "date": "2025-01-05T00:00:00.000Z",
+                        "type": "orchestra2"
+                    }
+                ]
             },
             {
                 "type": "orchestra3",
                 "number": "e250",
-                "conflicts": []
+                "conflicts": [
+                    {
+                        "date": "2025-01-18T22:00:00.000Z",
+                        "type": "orchestra3"
+                    }
+                ]
             },
             {
                 "type": "orchestra4",
@@ -2361,7 +1882,12 @@
             {
                 "type": "orchestra1",
                 "number": "e2",
-                "conflicts": []
+                "conflicts": [
+                    {
+                        "date": "2025-03-08T22:00:00.000Z",
+                        "type": "orchestra1"
+                    }
+                ]
             },
             {
                 "type": "orchestra2",
@@ -2381,12 +1907,7 @@
             {
                 "type": "orchestra5",
                 "number": "e369",
-                "conflicts": [
-                    {
-                        "date": "2025-01-05T00:00:00.000Z",
-                        "type": "orchestra4"
-                    }
-                ]
+                "conflicts": []
             },
             {
                 "type": "choir1",
@@ -2583,22 +2104,12 @@
             {
                 "type": "congregationRP",
                 "number": "e96",
-                "conflicts": [
-                    {
-                        "date": "2025-01-25T22:00:00.000Z",
-                        "type": "orchestra1"
-                    }
-                ]
+                "conflicts": []
             },
             {
                 "type": "congregationCM1",
                 "number": "e318",
-                "conflicts": [
-                    {
-                        "date": "2025-02-01T22:00:00.000Z",
-                        "type": "orchestra3"
-                    }
-                ]
+                "conflicts": []
             },
             {
                 "type": "congregationCM2",
@@ -2614,7 +2125,12 @@
             {
                 "type": "orchestra1",
                 "number": "e2",
-                "conflicts": []
+                "conflicts": [
+                    {
+                        "date": "2025-02-25T22:00:00.000Z",
+                        "type": "orchestra1"
+                    }
+                ]
             },
             {
                 "type": "orchestra2",
@@ -2639,12 +2155,7 @@
             {
                 "type": "orchestra5",
                 "number": "e240",
-                "conflicts": [
-                    {
-                        "date": "2025-01-11T22:00:00.000Z",
-                        "type": "orchestra3"
-                    }
-                ]
+                "conflicts": []
             },
             {
                 "type": "choir1",
@@ -2760,12 +2271,7 @@
             {
                 "type": "congregationOH",
                 "number": "e129",
-                "conflicts": [
-                    {
-                        "date": "2025-01-28T22:00:00.000Z",
-                        "type": "orchestra2"
-                    }
-                ]
+                "conflicts": []
             },
             {
                 "type": "congregationRP",
@@ -2810,7 +2316,7 @@
             },
             {
                 "type": "orchestra5",
-                "number": "a236",
+                "number": "a237",
                 "conflicts": []
             },
             {
@@ -2856,12 +2362,7 @@
             {
                 "type": "congregationCM1",
                 "number": "e102",
-                "conflicts": [
-                    {
-                        "date": "2025-01-21T22:00:00.000Z",
-                        "type": "orchestra1"
-                    }
-                ]
+                "conflicts": []
             },
             {
                 "type": "congregationCM2",
@@ -3150,6 +2651,690 @@
             {
                 "type": "orchestra5",
                 "number": "e283",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-01T22:00:00.000Z",
+        "serviceType": "",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "e207",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "e211",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "e216",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "e188",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "e140",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-05T22:00:00.000Z",
+        "serviceType": "",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "e181",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "e185",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "e222",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "e193",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "e205",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-12T22:00:00.000Z",
+        "serviceType": "Palm Sunday",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "e485",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "e528",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "e498",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "e506",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "e530",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-17T22:00:00.000Z",
+        "serviceType": "Good Friday",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "e500",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "e494",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "e490",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "e499",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "e505",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-19T22:00:00.000Z",
+        "serviceType": "Easter Sunday",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "e501",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "e511",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "e515",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "e507",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "e521",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-26T22:00:00.000Z",
+        "serviceType": "",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "a140",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "a180",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "a182",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "a229",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "a236",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-08T22:00:00.000Z",
+        "serviceType": "",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "e241",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "e255",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "e265",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "e26",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "e57",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-22T22:00:00.000Z",
+        "serviceType": "",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "choir4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationBS",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationOH",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationRP",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "congregationCM2",
+                "number": "N/A",
+                "conflicts": []
+            }
+        ]
+    },
+    {
+        "date": "2025-04-29T22:00:00.000Z",
+        "serviceType": "",
+        "songs": [
+            {
+                "type": "orchestra1",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra2",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra3",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra4",
+                "number": "N/A",
+                "conflicts": []
+            },
+            {
+                "type": "orchestra5",
+                "number": "N/A",
                 "conflicts": []
             },
             {
