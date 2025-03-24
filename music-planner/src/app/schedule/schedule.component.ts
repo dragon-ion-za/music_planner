@@ -94,7 +94,7 @@ export class ScheduleComponent {
       x.songs.forEach(y => {
         y.conflicts = [];
         if (y.number !== '' && y.number !== 'N/A') {
-          mappedSongs.filter(z => z.number == y.number && z.type != y.type).forEach(z => {
+          mappedSongs.filter(z => z.number == y.number && z.date != x.date).forEach(z => {
             y.conflicts.push({date: z.date, type: z.type});
           });
         }
