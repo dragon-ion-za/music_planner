@@ -6,3 +6,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .conflict {
     background-color: red;
 }
+
+.quarterConflict {
+    background-color: orange;
+}
+
+.yearConflict {
+    background-color: green;
+}

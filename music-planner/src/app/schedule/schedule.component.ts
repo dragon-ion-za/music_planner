@@ -21,6 +21,8 @@ export class Song {
   type: string = '';
   number: string = '';
   conflicts: ConflictDetail[] = [];
+  quarterConflicts: ConflictDetail[] = [];
+  yearConflicts: ConflictDetail[] = [];
 }
 
 export interface ConflictDetail {
@@ -80,9 +82,9 @@ export class ScheduleComponent {
 
   public checkForConflicts(e: Event, serviceDate: Date) {
     let endDate = new Date(serviceDate);
-    endDate.setMonth(endDate.getMonth() + 2);
+    endDate.setMonth(endDate.getMonth() + 6);
     let startDate = new Date(serviceDate);
-    startDate.setMonth(startDate.getMonth() - 2);
+    startDate.setMonth(startDate.getMonth() - 6);
 
     this.calculateConflicts(startDate, endDate);
   }
@@ -93,9 +95,25 @@ export class ScheduleComponent {
     filteredSchedule.forEach(x => {
       x.songs.forEach(y => {
         y.conflicts = [];
+        y.quarterConflicts = [];
+        y.yearConflicts = [];
         if (y.number !== '' && y.number !== 'N/A') {
           mappedSongs.filter(z => z.number == y.number && z.date != x.date).forEach(z => {
-            y.conflicts.push({date: z.date, type: z.type});
+            //y.conflicts.push({date: z.date, type: z.type});
+
+            // attempted new logic
+            var dateDiff = x.date.valueOf() - z.date.valueOf();
+            var diffDays = Math.ceil(dateDiff / (1000 * 3600 * 24));
+            console.log(diffDays);
+            if (diffDays > 90 || diffDays < -90) {
+              y.yearConflicts.push({date: z.date, type: z.type});
+            }
+            else if (diffDays > 56 || diffDays < -56) {
+              y.quarterConflicts.push({date: z.date, type: z.type});
+            }
+            else if (diffDays <= 56 || diffDays >= -56) {
+              y.conflicts.push({date: z.date, type: z.type});
+            }
           });
         }
       });
@@ -122,20 +140,20 @@ export class ScheduleComponent {
 
   public addDate() : void {
     this.dataSource.push({ date: new Date(), serviceType: '', songs: [
-      { type: 'orchestra1', number: 'N/A', conflicts: [] },
-      { type: 'orchestra2', number: 'N/A', conflicts: [] },
-      { type: 'orchestra3', number: 'N/A', conflicts: [] },
-      { type: 'orchestra4', number: 'N/A', conflicts: [] },
-      { type: 'orchestra5', number: 'N/A', conflicts: [] },
-      { type: 'choir1', number: 'N/A', conflicts: [] },
-      { type: 'choir2', number: 'N/A', conflicts: [] },
-      { type: 'choir3', number: 'N/A', conflicts: [] },
-      { type: 'choir4', number: 'N/A', conflicts: [] },
-      { type: 'congregationBS', number: 'N/A', conflicts: [] },
-      { type: 'congregationOH', number: 'N/A', conflicts: [] },
-      { type: 'congregationRP', number: 'N/A', conflicts: [] },
-      { type: 'congregationCM1', number: 'N/A', conflicts: [] },
-      { type: 'congregationCM2', number: 'N/A', conflicts: [] }
+      { type: 'orchestra1', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'orchestra2', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'orchestra3', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'orchestra4', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'orchestra5', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'choir1', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'choir2', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'choir3', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'choir4', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationBS', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationOH', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationRP', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationCM1', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationCM2', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] }
     ] });
   }
 }
