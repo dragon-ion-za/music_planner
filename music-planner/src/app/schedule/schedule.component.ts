@@ -10,6 +10,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import moment from 'moment';
+import * as repertoireData from '../../assets/repertoire.json';
 
 export interface ServiceMusicPlan {
   date: Date;
@@ -20,6 +21,7 @@ export interface ServiceMusicPlan {
 export class Song {
   type: string = '';
   number: string = '';
+  translatedNumber: string = '';
   conflicts: ConflictDetail[] = [];
   quarterConflicts: ConflictDetail[] = [];
   yearConflicts: ConflictDetail[] = [];
@@ -80,6 +82,12 @@ export class ScheduleComponent {
     fileReader.readAsText(file);
   }
 
+  public applyTranslations() {
+    this.dataSource.forEach(x => { 
+      x.songs.forEach(y => y.number.startsWith('e') ? y.translatedNumber = y.number : y.translatedNumber = y.number) 
+    });
+  }
+
   public checkForConflicts(e: Event, serviceDate: Date) {
     let endDate = new Date(serviceDate);
     endDate.setMonth(endDate.getMonth() + 6);
@@ -90,15 +98,17 @@ export class ScheduleComponent {
   }
 
   private calculateConflicts(startDate: Date, endDate: Date) {
+    this.applyTranslations();
+
     let filteredSchedule = this.dataSource.filter(x => x.date >= startDate && x.date <= endDate);
-    let mappedSongs: any[] = filteredSchedule.map(x => x.songs.map(y => <any>{ date: x.date, number: y.number, type: y.type })).flatMap(x => x);
+    let mappedSongs: any[] = filteredSchedule.map(x => x.songs.map(y => <any>{ date: x.date, number: y.number, translatedNumber: y.translatedNumber, type: y.type })).flatMap(x => x);
     filteredSchedule.forEach(x => {
       x.songs.forEach(y => {
         y.conflicts = [];
         y.quarterConflicts = [];
         y.yearConflicts = [];
         if (y.number !== '' && y.number !== 'N/A') {
-          mappedSongs.filter(z => z.number == y.number && z.date != x.date).forEach(z => {
+          mappedSongs.filter(z => z.translatedNumber == y.translatedNumber && z.date != x.date).forEach(z => {
             //y.conflicts.push({date: z.date, type: z.type});
 
             // attempted new logic
@@ -140,20 +150,20 @@ export class ScheduleComponent {
 
   public addDate() : void {
     this.dataSource.push({ date: new Date(), serviceType: '', songs: [
-      { type: 'orchestra1', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'orchestra2', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'orchestra3', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'orchestra4', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'orchestra5', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'choir1', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'choir2', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'choir3', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'choir4', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'congregationBS', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'congregationOH', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'congregationRP', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'congregationCM1', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
-      { type: 'congregationCM2', number: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] }
+      { type: 'orchestra1', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'orchestra2', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'orchestra3', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'orchestra4', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'orchestra5', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'choir1', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'choir2', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'choir3', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'choir4', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationBS', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationOH', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationRP', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationCM1', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] },
+      { type: 'congregationCM2', number: 'N/A', translatedNumber: 'N/A', conflicts: [], quarterConflicts: [], yearConflicts: [] }
     ] });
   }
 }
