@@ -72,6 +72,7 @@ export class ScheduleComponent {
     fileReader.onloadend = function(x) {
       self.fileContent = fileReader.result ?? "N/A";
       self.dataSource = JSON.parse(self.fileContent as string, self.reviveDate);
+      self.dataSource.forEach(x => { if (x.serviceType === '' ) x.serviceType = self.determineServiceType(x.date); });
 
       self.dataSource = self.dataSource.sort((x, y) =>  x.date > y.date ? 1 : x.date == y.date ? 0 : -1);
       let startDate = self.dataSource[0].date;
@@ -86,6 +87,14 @@ export class ScheduleComponent {
     this.dataSource.forEach(x => { 
       x.songs.forEach(y => y.number.startsWith('e') ? y.translatedNumber = y.number : y.translatedNumber = y.number) 
     });
+  }
+
+  public determineServiceType(serviceDate: Date) : string {
+    if (moment(serviceDate).day() === 0) {
+      return 'Sunday Service';
+    } else {
+      return 'Midweek Service';
+    }
   }
 
   public checkForConflicts(e: Event, serviceDate: Date) {
@@ -121,7 +130,7 @@ export class ScheduleComponent {
             else if (diffDays > 56 || diffDays < -56) {
               y.quarterConflicts.push({date: z.date, type: z.type});
             }
-            else if (diffDays <= 56 || diffDays >= -56) {
+            else if (diffDays <= 56 && diffDays >= -56) {
               y.conflicts.push({date: z.date, type: z.type});
             }
           });
