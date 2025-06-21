@@ -123,15 +123,18 @@ export class ScheduleComponent {
             // attempted new logic
             var dateDiff = x.date.valueOf() - z.date.valueOf();
             var diffDays = Math.ceil(dateDiff / (1000 * 3600 * 24));
-            console.log(diffDays);
+            console.log(`${z.translatedNumber} ${z.date} ${x.date}: ${diffDays}`);
             if (diffDays > 90 || diffDays < -90) {
               y.yearConflicts.push({date: z.date, type: z.type});
+              console.log('year');
             }
             else if (diffDays > 56 || diffDays < -56) {
               y.quarterConflicts.push({date: z.date, type: z.type});
+              console.log('quater');
             }
             else if (diffDays <= 56 && diffDays >= -56) {
               y.conflicts.push({date: z.date, type: z.type});
+              console.log('conflict');
             }
           });
         }
