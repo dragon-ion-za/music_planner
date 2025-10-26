@@ -41,6 +41,7 @@
                     <mat-label>{{song.type}}</mat-label>
                     <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number" (change)="checkForConflicts($event, service.date)"
                         matTooltip="{{song.conflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.conflicts) : song.quarterConflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.quarterConflicts) : song.yearConflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.yearConflicts) : null}}">
+                    <mat-hint>{{song.translatedNumber}}</mat-hint>    
                 </mat-form-field>
             </mat-grid-tile>
         }

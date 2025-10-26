@@ -1,4 +1,4 @@
-[
+{ "songs": [
     { "number": "A1", "translation": "", "signature":"", "tempo":"", "familiarity":0 },
 { "number": "A10", "translation": "E7", "signature":"", "tempo":"", "familiarity":0 },
 { "number": "A100", "translation": "E139", "signature":"", "tempo":"", "familiarity":0 },
@@ -1444,3 +1444,4 @@
 { "number": "HC98", "translation": "", "signature":"", "tempo":"", "familiarity":0 },
 { "number": "HC99", "translation": "", "signature":"", "tempo":"", "familiarity":0 }
 ]
+}

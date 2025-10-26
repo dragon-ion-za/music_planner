@@ -18,6 +18,11 @@ export interface ServiceMusicPlan {
   songs: Song[];
 }
 
+export interface RepertoireSong {
+  number: string ;
+  translation: string;
+}
+
 export class Song {
   type: string = '';
   number: string = '';
@@ -61,6 +66,7 @@ export const MY_FORMATS = {
 })
 export class ScheduleComponent {
   dataSource: ServiceMusicPlan[] = [];
+  repertoireSongs: RepertoireSong[] = repertoireData.songs;
 
   fileContent: string | ArrayBuffer = '';
 
@@ -84,9 +90,14 @@ export class ScheduleComponent {
   }
 
   public applyTranslations() {
-    this.dataSource.forEach(x => { 
-      x.songs.forEach(y => y.number.startsWith('e') ? y.translatedNumber = y.number : y.translatedNumber = y.number) 
-    });
+    this.dataSource.forEach(x => {
+      x.songs.forEach(y => {       
+        if (y.number.toLocaleLowerCase() !== 'n/a') {
+          let translation = this.repertoireSongs.filter(z => z.number.toLocaleLowerCase() == y.number.toLocaleLowerCase())[0];
+          y.translatedNumber = translation !== undefined && translation.translation !== '' ? y.translatedNumber = translation.translation.toLocaleLowerCase() : y.translatedNumber = y.number.toLocaleLowerCase();
+        }
+      } 
+    )});
   }
 
   public determineServiceType(serviceDate: Date) : string {
@@ -99,9 +110,9 @@ export class ScheduleComponent {
 
   public checkForConflicts(e: Event, serviceDate: Date) {
     let endDate = new Date(serviceDate);
-    endDate.setMonth(endDate.getMonth() + 6);
+    endDate.setMonth(endDate.getMonth() + 10);
     let startDate = new Date(serviceDate);
-    startDate.setMonth(startDate.getMonth() - 6);
+    startDate.setMonth(startDate.getMonth() - 10);
 
     this.calculateConflicts(startDate, endDate);
   }
@@ -110,14 +121,14 @@ export class ScheduleComponent {
     this.applyTranslations();
 
     let filteredSchedule = this.dataSource.filter(x => x.date >= startDate && x.date <= endDate);
-    let mappedSongs: any[] = filteredSchedule.map(x => x.songs.map(y => <any>{ date: x.date, number: y.number, translatedNumber: y.translatedNumber, type: y.type })).flatMap(x => x);
+    let mappedSongs: any[] = filteredSchedule.map(x => x.songs.map(y => <any>{ date: x.date, number: y.number.trim(), translatedNumber: y.translatedNumber.trim(), type: y.type })).flatMap(x => x);
     filteredSchedule.forEach(x => {
       x.songs.forEach(y => {
         y.conflicts = [];
         y.quarterConflicts = [];
         y.yearConflicts = [];
-        if (y.number !== '' && y.number !== 'N/A') {
-          mappedSongs.filter(z => z.translatedNumber == y.translatedNumber && z.date != x.date).forEach(z => {
+        if (y.number.trim() !== '' && y.number.trim() !== 'N/A') {
+          mappedSongs.filter(z => z.translatedNumber.trim() == y.translatedNumber.trim() && z.date != x.date).forEach(z => {
             //y.conflicts.push({date: z.date, type: z.type});
 
             // attempted new logic
