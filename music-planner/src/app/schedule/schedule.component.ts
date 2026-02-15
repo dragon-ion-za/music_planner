@@ -128,7 +128,7 @@ export class ScheduleComponent {
         y.quarterConflicts = [];
         y.yearConflicts = [];
         if (y.number.trim() !== '' && y.number.trim() !== 'N/A') {
-          mappedSongs.filter(z => z.translatedNumber.trim() == y.translatedNumber.trim() && z.date != x.date).forEach(z => {
+          mappedSongs.filter(z => z.translatedNumber.trim() == y.translatedNumber.trim() && (z.date != x.date || (z.date == x.date && z.type != y.type)) ).forEach(z => {
             //y.conflicts.push({date: z.date, type: z.type});
 
             // attempted new logic

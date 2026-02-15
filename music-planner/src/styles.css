@@ -14,3 +14,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .yearConflict {
     background-color: green;
 }
+
+.noConflict {
+    background-color: teal;
+}

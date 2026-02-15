@@ -1,52 +1,40 @@
-<mat-grid-list cols="16" rowHeight="64px">
-    <mat-grid-tile>Date</mat-grid-tile>
-    <mat-grid-tile>Service Type</mat-grid-tile>
-    <mat-grid-tile>Orchestra 1</mat-grid-tile>
-    <mat-grid-tile>Orchestra 2</mat-grid-tile>
-    <mat-grid-tile>Orchestra 3</mat-grid-tile>
-    <mat-grid-tile>Orchestra 4</mat-grid-tile>
-    <mat-grid-tile>Orchestra 5</mat-grid-tile>
-    <mat-grid-tile>Choir 1</mat-grid-tile>
-    <mat-grid-tile>Choir 2</mat-grid-tile>
-    <mat-grid-tile>Choir 3</mat-grid-tile>
-    <mat-grid-tile>Choir 4</mat-grid-tile>
-    <mat-grid-tile>Before Service</mat-grid-tile>
-    <mat-grid-tile>Opening Hymn</mat-grid-tile>
-    <mat-grid-tile>Repentance</mat-grid-tile>
-    <mat-grid-tile>Communion 1</mat-grid-tile>
-    <mat-grid-tile>Communion 2</mat-grid-tile>
-
+<mat-grid-list cols="2" rowHeight="138px" [gutterSize]="'10px'">
     @for (service of dataSource; track service.date) {
-
         <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Date</mat-label>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="service.date">
-                <mat-hint>YYYY/MM/DD</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+            <mat-grid-list cols="8" rowHeight="69px">
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <mat-label>Date</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="service.date">
+                        <mat-hint>YYYY/MM/DD</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+        
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <mat-label>Service Type</mat-label>
+                        <input matInput placeholder="Service Type" [(ngModel)]="service.serviceType">
+                    </mat-form-field>
+                </mat-grid-tile>
+        
+                @for (song of service.songs; track song.type) {
+                    <mat-grid-tile>
+                        <mat-form-field [class]="{'conflict': song.conflicts?.length ?? 0 > 0, 
+                            'quarterConflict': song.quarterConflicts?.length ?? 0 > 0 && song.conflicts?.length === 0, 
+                            'yearConflict': song.yearConflicts?.length ?? 0 > 0 && song.conflicts?.length === 0,
+                             'noConflict': song.conflicts?.length === 0 && song.quarterConflicts?.length === 0 && song.yearConflicts?.length === 0 && song.number !== 'N/A'}">
+                            <mat-label>{{song.type}}</mat-label>
+                            <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number" (change)="checkForConflicts($event, service.date)"
+                                matTooltip="{{song.conflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.conflicts) : song.quarterConflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.quarterConflicts) : song.yearConflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.yearConflicts) : null}}">
+                            <mat-hint>{{song.translatedNumber}}</mat-hint>    
+                        </mat-form-field>
+                    </mat-grid-tile>
+                }
+            </mat-grid-list>
         </mat-grid-tile>
-
-        <mat-grid-tile>
-            <mat-form-field>
-                <mat-label>Service Type</mat-label>
-                <input matInput placeholder="Service Type" [(ngModel)]="service.serviceType">
-            </mat-form-field>
-        </mat-grid-tile>
-
-        @for (song of service.songs; track song.type) {
-            <mat-grid-tile>
-                <mat-form-field [class]="{'conflict': song.conflicts?.length ?? 0 > 0, 'quarterConflict': song.quarterConflicts?.length ?? 0 > 0 && song.conflicts?.length === 0, 'yearConflict': song.yearConflicts?.length ?? 0 > 0 && song.conflicts?.length === 0}">
-                    <mat-label>{{song.type}}</mat-label>
-                    <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number" (change)="checkForConflicts($event, service.date)"
-                        matTooltip="{{song.conflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.conflicts) : song.quarterConflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.quarterConflicts) : song.yearConflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.yearConflicts) : null}}">
-                    <mat-hint>{{song.translatedNumber}}</mat-hint>    
-                </mat-form-field>
-            </mat-grid-tile>
-        }
     }
-
 </mat-grid-list>
 
 <input type="file" (change)="handleFileInput($event)">
