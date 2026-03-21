@@ -110,9 +110,9 @@ export class ScheduleComponent {
 
   public checkForConflicts(e: Event, serviceDate: Date) {
     let endDate = new Date(serviceDate);
-    endDate.setMonth(endDate.getMonth() + 10);
+    endDate.setMonth(endDate.getMonth() + 12);
     let startDate = new Date(serviceDate);
-    startDate.setMonth(startDate.getMonth() - 10);
+    startDate.setMonth(startDate.getMonth() - 12);
 
     this.calculateConflicts(startDate, endDate);
   }
