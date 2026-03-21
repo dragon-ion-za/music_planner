@@ -1,0 +1,26 @@
+services:
+  angular-app:
+    build: .
+    ports:
+      - "4200:80"
+    networks:
+      - music-planner-net
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-music_planner}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - music-planner-net
+
+networks:
+  music-planner-net:
+
+volumes:
+  postgres_data:
