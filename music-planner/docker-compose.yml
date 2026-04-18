@@ -1,8 +1,32 @@
 services:
   angular-app:
-    build: .
+    build:
+      context: .
+      target: angular-runner
     ports:
       - "4200:80"
+    networks:
+      - music-planner-net
+
+  api:
+    build:
+      context: .
+      target: api-runner
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB:-music_planner}
+      DB_USER: ${POSTGRES_USER:-postgres}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      AUTH0_DOMAIN: ${AUTH0_DOMAIN}
+      AUTH0_AUDIENCE: ${AUTH0_AUDIENCE}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:4200}
+    depends_on:
+      - postgres
     networks:
       - music-planner-net
 
