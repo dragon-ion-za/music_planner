@@ -11,24 +11,24 @@
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                 </mat-grid-tile>
-        
+
                 <mat-grid-tile>
                     <mat-form-field>
                         <mat-label>Service Type</mat-label>
                         <input matInput placeholder="Service Type" [(ngModel)]="service.serviceType">
                     </mat-form-field>
                 </mat-grid-tile>
-        
+
                 @for (song of service.songs; track song.type) {
                     <mat-grid-tile>
-                        <mat-form-field [class]="{'conflict': song.conflicts?.length ?? 0 > 0, 
-                            'quarterConflict': song.quarterConflicts?.length ?? 0 > 0 && song.conflicts?.length === 0, 
+                        <mat-form-field [class]="{'conflict': song.conflicts?.length ?? 0 > 0,
+                            'quarterConflict': song.quarterConflicts?.length ?? 0 > 0 && song.conflicts?.length === 0,
                             'yearConflict': song.yearConflicts?.length ?? 0 > 0 && song.conflicts?.length === 0,
-                             'noConflict': song.conflicts?.length === 0 && song.quarterConflicts?.length === 0 && song.yearConflicts?.length === 0 && song.number !== 'N/A'}">
+                            'noConflict': song.conflicts?.length === 0 && song.quarterConflicts?.length === 0 && song.yearConflicts?.length === 0 && song.number !== 'N/A'}">
                             <mat-label>{{song.type}}</mat-label>
                             <input matInput placeholder="{{song.type}}" [(ngModel)]="song.number" (change)="checkForConflicts($event, service.date)"
                                 matTooltip="{{song.conflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.conflicts) : song.quarterConflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.quarterConflicts) : song.yearConflicts?.length ?? 0 > 0 ? buildConflictsTooltip(song.yearConflicts) : null}}">
-                            <mat-hint>{{song.translatedNumber}}</mat-hint>    
+                            <mat-hint>{{song.translatedNumber}}</mat-hint>
                         </mat-form-field>
                     </mat-grid-tile>
                 }

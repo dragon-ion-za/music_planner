@@ -5,3 +5,9 @@ dist
 .env
 .env.*
 *.md
+src
+music-planner-app/node_modules
+music-planner-app/dist
+music-planner-app/.angular
+music-planner-api/node_modules
+music-planner-api/dist
