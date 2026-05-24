@@ -1,0 +1,53 @@
+.slot-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: grab;
+  border: 1px solid transparent;
+}
+
+.slot-item:active {
+  cursor: grabbing;
+}
+
+.conflict-red {
+  background-color: rgba(244, 67, 54, 0.15);
+  border-color: rgba(244, 67, 54, 0.5);
+}
+
+.conflict-yellow {
+  background-color: rgba(255, 193, 7, 0.15);
+  border-color: rgba(255, 193, 7, 0.5);
+}
+
+.conflict-green {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-color: rgba(76, 175, 80, 0.5);
+}
+
+.slot-key {
+  font-weight: 600;
+  min-width: 80px;
+}
+
+.song-number {
+  font-weight: 500;
+}
+
+.translation {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.category {
+  color: #888;
+  font-size: 0.75rem;
+  margin-left: auto;
+}
+
+.empty-placeholder {
+  color: #bbb;
+}

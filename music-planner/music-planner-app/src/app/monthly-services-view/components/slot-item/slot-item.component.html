@@ -1,0 +1,14 @@
+<div class="slot-item" [class]="conflictClass" cdkDrag [cdkDragData]="slot" [cdkDragDisabled]="disabled" [matTooltip]="tooltipText">
+  <ng-container *ngIf="slot.songId; else emptySlot">
+    <span class="slot-key">{{ slot.slotTemplate.slotKey }}</span>
+    <span class="song-number">{{ slot.song?.number }}</span>
+    <span class="translation" *ngIf="slot.song?.translationOf">
+      &rarr; {{ slot.song?.translationOf?.number }}
+    </span>
+    <span class="category">{{ slot.slotTemplate.category }}</span>
+  </ng-container>
+  <ng-template #emptySlot>
+    <span class="slot-key">{{ slot.slotTemplate.slotKey }}</span>
+    <span class="empty-placeholder">&mdash;</span>
+  </ng-template>
+</div>

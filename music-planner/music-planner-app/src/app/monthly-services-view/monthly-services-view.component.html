@@ -1,0 +1,45 @@
+<div class="monthly-view-container">
+  <div class="toolbar">
+    <app-month-navigator
+      [selectedMonth]="selectedMonth"
+      (monthChange)="onMonthChange($event)"
+    ></app-month-navigator>
+  </div>
+
+  <mat-spinner *ngIf="loading" diameter="48" class="spinner"></mat-spinner>
+
+  <div class="error-banner" *ngIf="authError">
+    <p>You are not authenticated. Please log in to view services.</p>
+  </div>
+
+  <div class="error-banner" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && !error && !authError && displayServices.length === 0">
+    <p>No services scheduled for this month.</p>
+  </div>
+
+  <div class="service-grid" *ngIf="!loading && !error && !authError && displayServices.length > 0">
+    <div class="grid-row" *ngFor="let pair of servicePairs">
+      <app-service-card
+        *ngIf="pair[0]"
+        [service]="pair[0]!"
+        [conflictMap]="conflictMap"
+        [allDropLists]="allDropLists"
+        [swapping]="swapping"
+        (dropped)="onDrop($event)"
+      ></app-service-card>
+      <div class="grid-cell-empty" *ngIf="!pair[0]"></div>
+      <app-service-card
+        *ngIf="pair[1]"
+        [service]="pair[1]!"
+        [conflictMap]="conflictMap"
+        [allDropLists]="allDropLists"
+        [swapping]="swapping"
+        (dropped)="onDrop($event)"
+      ></app-service-card>
+      <div class="grid-cell-empty" *ngIf="!pair[1]"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.month-navigator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.month-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  min-width: 160px;
+  text-align: center;
+}

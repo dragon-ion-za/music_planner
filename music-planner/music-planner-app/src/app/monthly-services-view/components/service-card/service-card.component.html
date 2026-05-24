@@ -1,0 +1,26 @@
+<mat-card class="service-card">
+  <mat-card-header>
+    <mat-card-title>{{ service.serviceDate }}</mat-card-title>
+    <mat-card-subtitle>{{ service.serviceType }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div
+      cdkDropList
+      [id]="'service-' + service.id"
+      [cdkDropListData]="service.serviceSlots"
+      [cdkDropListConnectedTo]="allDropLists"
+      cdkDropListSortingDisabled
+      (cdkDropListDropped)="onDrop($event)"
+    >
+      <div class="slot-group" *ngFor="let group of service.slotGroups">
+        <div class="category-label">{{ group.category }}</div>
+        <app-slot-item
+          *ngFor="let slot of group.slots"
+          [slot]="slot"
+          [conflict]="conflictMap[slot.id] ?? null"
+          [disabled]="swapping"
+        ></app-slot-item>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,9 @@
+<div class="month-navigator">
+  <button mat-icon-button (click)="prev()" aria-label="Previous month">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <span class="month-label">{{ selectedMonth.format('MMMM YYYY') }}</span>
+  <button mat-icon-button (click)="next()" aria-label="Next month">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>
