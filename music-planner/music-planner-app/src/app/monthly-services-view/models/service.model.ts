@@ -60,3 +60,14 @@ export interface MonthState {
   conflictFrom: string;
   conflictTo: string;
 }
+
+export interface CreateServiceSlotInput {
+  slotKey: string;
+  songNumber: string | null;   // null for empty slots
+}
+
+export interface CreateServicePayload {
+  serviceDate: string;          // YYYY-MM-DD
+  serviceType: string;
+  slots: CreateServiceSlotInput[];
+}

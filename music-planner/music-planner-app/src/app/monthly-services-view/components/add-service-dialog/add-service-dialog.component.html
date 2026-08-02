@@ -1,0 +1,79 @@
+<h2 mat-dialog-title>Add Service</h2>
+<mat-dialog-content>
+  <form #form="ngForm" class="dialog-form" [class.form-disabled]="saving">
+
+    <!-- Service Date -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Service Date</mat-label>
+      <input matInput
+             [matDatepicker]="picker"
+             [ngModel]="serviceDate"
+             (ngModelChange)="onDateChange($event)"
+             name="serviceDate"
+             required
+             #serviceDateModel="ngModel"
+             placeholder="YYYY-MM-DD">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="submitAttempted && serviceDateModel.invalid">Service date is required.</mat-error>
+    </mat-form-field>
+
+    <!-- Service Type -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Service Type</mat-label>
+      <input matInput
+             [(ngModel)]="serviceType"
+             name="serviceType"
+             required
+             #serviceTypeModel="ngModel"
+             placeholder="e.g. Sunday Service">
+      <mat-error *ngIf="submitAttempted && serviceTypeModel.invalid">Service type is required.</mat-error>
+    </mat-form-field>
+
+    <!-- Song Slots grouped by category -->
+    <ng-container *ngFor="let group of slotGroups">
+      <h3 class="category-header">{{ group.category | titlecase }}</h3>
+      <div class="slot-grid">
+        <div *ngFor="let slot of group.slots" class="slot-wrapper">
+          <mat-form-field appearance="outline" class="slot-field">
+            <mat-label>{{ slot.slotKey }}</mat-label>
+            <input matInput
+                   [(ngModel)]="slot.songNumber"
+                   [name]="slot.slotKey"
+                   [matAutocomplete]="auto"
+                   (ngModelChange)="filterOptions(slot)"
+                   placeholder="Song number">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of slot.filteredOptions" [value]="option.number">
+                {{ option.translation ? option.number + ' (→ ' + option.translation + ')' : option.number }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="submitAttempted && slot.songNumber && !repertoireSet.has(slot.songNumber)">
+              Unknown song number.
+            </mat-error>
+          </mat-form-field>
+          <!-- Conflict badge rendered after the field -->
+          <span
+            *ngIf="slot.conflictStatus && slot.conflictStatus.severity && slot.songNumber"
+            class="conflict-badge"
+            [class.conflict-red]="slot.conflictStatus.severity === 'red'"
+            [class.conflict-yellow]="slot.conflictStatus.severity === 'yellow'"
+            [class.conflict-green]="slot.conflictStatus.severity === 'green'"
+            [matTooltip]="getConflictTooltip(slot)"
+            matTooltipPosition="above">
+            ●
+          </span>
+        </div>
+      </div>
+    </ng-container>
+
+  </form>
+</mat-dialog-content>
+<div *ngIf="submitError" class="submit-error">{{ submitError }}</div>
+<mat-dialog-actions align="end">
+  <button mat-button [disabled]="saving" (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="saving" (click)="onSave(form)">
+    <mat-spinner *ngIf="saving" diameter="18" class="save-spinner"></mat-spinner>
+    <span *ngIf="!saving">Save</span>
+  </button>
+</mat-dialog-actions>

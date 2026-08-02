@@ -1,0 +1,59 @@
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 700px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.category-header {
+  margin: 16px 0 4px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.slot-field {
+  width: 100%;
+}
+
+.slot-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.conflict-badge {
+  font-size: 10px;
+  margin-top: 2px;
+  cursor: default;
+}
+
+.conflict-red    { color: #f44336; }
+.conflict-yellow { color: #ff9800; }
+.conflict-green  { color: #4caf50; }
+
+.submit-error {
+  color: #f44336;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.save-spinner {
+  display: inline-block;
+  margin: 0 4px;
+}
+
+.form-disabled input,
+.form-disabled button {
+  pointer-events: none;
+  opacity: 0.6;
+}

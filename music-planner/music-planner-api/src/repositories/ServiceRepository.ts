@@ -11,7 +11,8 @@ export interface DateRange {
 
 export interface SlotInput {
   slotKey: string;
-  songId?: string | null;
+  songId?: string | null;       // pre-resolved UUID (used by existing PUT path)
+  songNumber?: string | null;   // song number string (used by new POST path)
 }
 
 const SERVICE_INCLUDE = [
@@ -74,10 +75,17 @@ export const ServiceRepository = {
           where: { congregationId, serviceType, slotKey: entry.slotKey },
         });
         if (template) {
+          let resolvedSongId: string | null = null;
+          if (entry.songId !== undefined && entry.songId !== null) {
+            resolvedSongId = entry.songId;
+          } else if (entry.songNumber) {
+            const song = await Song.findOne({ where: { number: entry.songNumber } });
+            resolvedSongId = song?.id ?? null;
+          }
           await ServiceSlot.create({
             serviceId: service.id,
             slotTemplateId: template.id,
-            songId: entry.songId ?? null,
+            songId: resolvedSongId,
           });
         }
       }

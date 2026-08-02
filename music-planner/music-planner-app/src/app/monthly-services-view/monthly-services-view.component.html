@@ -4,6 +4,7 @@
       [selectedMonth]="selectedMonth"
       (monthChange)="onMonthChange($event)"
     ></app-month-navigator>
+    <button mat-raised-button color="primary" (click)="openAddServiceDialog()">Add Service</button>
   </div>
 
   <mat-spinner *ngIf="loading" diameter="48" class="spinner"></mat-spinner>

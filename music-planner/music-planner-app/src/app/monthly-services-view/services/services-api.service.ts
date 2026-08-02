@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from '@auth0/auth0-angular';
-import { Service, SlotInput } from '../models/service.model';
+import { Service, SlotInput, CreateServicePayload } from '../models/service.model';
 
 @Injectable({ providedIn: 'root' })
 export class ServicesApiService {
@@ -27,6 +27,14 @@ export class ServicesApiService {
   updateServiceSlots(serviceId: string, slots: SlotInput[]): Observable<Service> {
     return this.withToken(token =>
       this.http.put<Service>(`/api/services/${serviceId}`, { slots }, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+    );
+  }
+
+  createService(payload: CreateServicePayload): Observable<Service> {
+    return this.withToken(token =>
+      this.http.post<Service>('/api/services', payload, {
         headers: { Authorization: `Bearer ${token}` }
       })
     );

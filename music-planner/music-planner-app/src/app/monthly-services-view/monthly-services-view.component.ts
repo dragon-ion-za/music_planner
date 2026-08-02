@@ -5,6 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CdkDropList, CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '@auth0/auth0-angular';
 import moment from 'moment';
 import { ServicesApiService } from './services/services-api.service';
@@ -12,6 +14,7 @@ import { ConflictDetectionService } from './services/conflict-detection.service'
 import { SlotSwapService } from './services/slot-swap.service';
 import { MonthNavigatorComponent } from './components/month-navigator/month-navigator.component';
 import { ServiceCardComponent } from './components/service-card/service-card.component';
+import { AddServiceDialogComponent } from './components/add-service-dialog/add-service-dialog.component';
 import {
   Service, ServiceViewModel, ServiceSlotViewModel, SlotGroup, ConflictMap
 } from './models/service.model';
@@ -24,6 +27,7 @@ import {
     DragDropModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatButtonModule,
     MonthNavigatorComponent,
     ServiceCardComponent
   ],
@@ -50,7 +54,8 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
     private slotSwapService: SlotSwapService,
     private auth: AuthService,
     private snackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +72,18 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
   onMonthChange(month: moment.Moment): void {
     this.selectedMonth = month;
     this.loadServices(month);
+  }
+
+  openAddServiceDialog(): void {
+    const dialogRef = this.dialog.open(AddServiceDialogComponent, {
+      width: '800px',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'saved') {
+        this.loadServices(this.selectedMonth);
+      }
+    });
   }
 
   loadServices(month: moment.Moment): void {
