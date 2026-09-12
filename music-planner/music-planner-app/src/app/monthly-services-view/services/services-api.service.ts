@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from '@auth0/auth0-angular';
 import { Service, SlotInput, CreateServicePayload } from '../models/service.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ServicesApiService {
@@ -15,9 +16,17 @@ export class ServicesApiService {
     );
   }
 
+  private buildUrl(path: string): string {
+    const base = environment.apiBaseUrl;
+    if (!base) {
+      return path;
+    }
+    return base.replace(/\/$/, '') + path;
+  }
+
   getServices(from: string, to: string): Observable<Service[]> {
     return this.withToken(token =>
-      this.http.get<Service[]>(`/api/services`, {
+      this.http.get<Service[]>(this.buildUrl(`/api/services`), {
         params: { from, to },
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -26,7 +35,7 @@ export class ServicesApiService {
 
   updateServiceSlots(serviceId: string, slots: SlotInput[]): Observable<Service> {
     return this.withToken(token =>
-      this.http.put<Service>(`/api/services/${serviceId}`, { slots }, {
+      this.http.put<Service>(this.buildUrl(`/api/services/${serviceId}`), { slots }, {
         headers: { Authorization: `Bearer ${token}` }
       })
     );
@@ -34,7 +43,7 @@ export class ServicesApiService {
 
   createService(payload: CreateServicePayload): Observable<Service> {
     return this.withToken(token =>
-      this.http.post<Service>('/api/services', payload, {
+      this.http.post<Service>(this.buildUrl('/api/services'), payload, {
         headers: { Authorization: `Bearer ${token}` }
       })
     );

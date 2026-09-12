@@ -112,6 +112,7 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
         this.loading = false;
         this.displayServices = [];
         this.servicePairs = [];
+        console.log(err);
         if (err.status === 401) {
           this.authError = true;
         } else {

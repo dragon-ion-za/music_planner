@@ -5,6 +5,14 @@ import { of } from 'rxjs';
 import fc from 'fast-check';
 import { ServicesApiService } from './services-api.service';
 import { AuthService } from '@auth0/auth0-angular';
+import { environment } from '../../../environments/environment';
+
+// URL composition mirrors ServicesApiService.buildUrl: empty base -> relative path,
+// otherwise the base URL (with a single trailing slash stripped) prepended to the path.
+const expectedUrl = (path: string): string => {
+  const base = environment.apiBaseUrl;
+  return base ? base.replace(/\/$/, '') + path : path;
+};
 
 describe('ServicesApiService', () => {
   let service: ServicesApiService;
@@ -43,7 +51,7 @@ describe('ServicesApiService', () => {
 
           service.getServices('2024-01-01', '2024-01-31').subscribe();
 
-          const req = httpMock.expectOne(r => r.url === '/api/services');
+          const req = httpMock.expectOne(r => r.url === expectedUrl('/api/services'));
           expect(req.request.headers.get('Authorization')).toBe(`Bearer ${token}`);
           req.flush([]);
         }
@@ -62,7 +70,7 @@ describe('ServicesApiService', () => {
 
           service.updateServiceSlots(serviceId, []).subscribe();
 
-          const req = httpMock.expectOne(r => r.url === `/api/services/${serviceId}`);
+          const req = httpMock.expectOne(r => r.url === expectedUrl(`/api/services/${serviceId}`));
           expect(req.request.headers.get('Authorization')).toBe(`Bearer ${token}`);
           req.flush({});
         }

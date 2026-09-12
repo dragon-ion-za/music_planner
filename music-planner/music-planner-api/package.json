@@ -8,6 +8,7 @@
     "start:prod": "node dist/api/server.js",
     "migrate": "ts-node src/db/migrate.ts",
     "seed:songs": "ts-node src/seeds/seedSongs.ts",
+    "seed:songs:csv": "ts-node src/seeds/seedSongsFromCsv.ts",
     "seed:slots": "ts-node src/seeds/seedSlotTemplates.ts",
     "seed:import": "ts-node src/seeds/importSchedule.ts",
     "test": "jest --no-coverage"

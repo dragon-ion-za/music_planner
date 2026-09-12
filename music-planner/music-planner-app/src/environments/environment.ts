@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
-  auth0Domain: 'YOUR_AUTH0_DOMAIN',
-  auth0ClientId: 'YOUR_AUTH0_CLIENT_ID',
-  auth0Audience: 'YOUR_AUTH0_AUDIENCE'
+  apiBaseUrl: 'http://localhost:3000/',
+  auth0Domain: 'dev-2hlsed8fxycmhux5.eu.auth0.com',
+  auth0ClientId: 'LT4fB5paONfXQcXyHd9BWLlymXWH4t0x',
+  auth0Audience: 'https://www.nacmusicplanner.co.za'
 };
