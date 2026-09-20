@@ -1,0 +1,186 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Implement `deriveUserIdentifier(user)` in the auth-button module": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199775708
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199786595
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199920231
+      }
+    ],
+    "2.1 Scaffold the standalone component and wire observables": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199775849
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199925182
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200249073
+      }
+    ],
+    "2.2 Build the three-state template": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199775995
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200263031
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200332125
+      }
+    ],
+    "2.3 Implement `login()` and `logout()` actions with error handling": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199776096
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200336337
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200427567
+      }
+    ],
+    "3. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199776178
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200432104
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200578425
+      }
+    ],
+    "4.1 Add the control to `AppComponent`": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199776258
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200584746
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200667492
+      }
+    ],
+    "5.1 Subscribe `MonthlyServicesViewComponent` to `AuthService.error$`": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199776342
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200585781
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200730899
+      }
+    ],
+    "5.2 (Optional) Add `AuthErrorState` service for initiation-failure surfacing": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199776427
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200736563
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200829825
+      }
+    ],
+    "6. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199776505
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200835446
+      },
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200938878
+      }
+    ],
+    "1. Create pure `deriveUserIdentifier` derivation": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789199920307
+      }
+    ],
+    "2. Implement `AuthButtonComponent`": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200427644
+      }
+    ],
+    "4. Wire `AuthButtonComponent` into the navigation bar": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200667563
+      }
+    ],
+    "5. Integrate auth-failure surfacing with the Monthly View banner": [
+      {
+        "executionId": "b89e192f-c6cd-497e-95ab-3af8741d6883",
+        "chatSessionId": "sess_5d7819c1-e747-45d2-b996-f1b8cbbd155b",
+        "timestamp": 1789200829900
+      }
+    ]
+  }
+}
