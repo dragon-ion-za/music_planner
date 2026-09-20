@@ -1,10 +1,30 @@
-services:
+﻿services:
   angular-app:
     build:
       context: .
       target: angular-runner
     ports:
       - "4200:80"
+    networks:
+      - music-planner-net
+
+  migrate:
+    build:
+      context: .
+      target: api-runner
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["node dist/db/migrate.js && node dist/seeds/seedInit.js"]
+    environment:
+      NODE_ENV: production
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB:-music_planner}
+      DB_USER: ${POSTGRES_USER:-postgres}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
     networks:
       - music-planner-net
 
@@ -26,7 +46,8 @@ services:
       AUTH0_AUDIENCE: ${AUTH0_AUDIENCE}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:4200}
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - music-planner-net
 
@@ -40,6 +61,11 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-music_planner}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
       - music-planner-net
 
