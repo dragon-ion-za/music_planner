@@ -16,3 +16,9 @@
 .app-nav a.active {
   background: rgba(255, 255, 255, 0.2);
 }
+
+.nav-auth {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}

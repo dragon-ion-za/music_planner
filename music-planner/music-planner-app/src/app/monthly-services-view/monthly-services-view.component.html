@@ -10,7 +10,7 @@
   <mat-spinner *ngIf="loading" diameter="48" class="spinner"></mat-spinner>
 
   <div class="error-banner" *ngIf="authError">
-    <p>You are not authenticated. Please log in to view services.</p>
+    <p>{{ authErrorMessage || 'You are not authenticated. Please log in to view services.' }}</p>
   </div>
 
   <div class="error-banner" *ngIf="error">

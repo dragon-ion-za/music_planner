@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -9,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '@auth0/auth0-angular';
 import moment from 'moment';
+import { AuthErrorState } from '../auth-error-state.service';
 import { ServicesApiService } from './services/services-api.service';
 import { ConflictDetectionService } from './services/conflict-detection.service';
 import { SlotSwapService } from './services/slot-swap.service';
@@ -46,19 +48,48 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
   loading = false;
   swapping = false;
   authError = false;
+  authErrorMessage: string | null = null;
   error: string | null = null;
+
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor(
     private servicesApiService: ServicesApiService,
     private conflictDetectionService: ConflictDetectionService,
     private slotSwapService: SlotSwapService,
     private auth: AuthService,
+    private authErrors: AuthErrorState,
     private snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    // Surface Auth0 SDK authentication failures (e.g. a failed or cancelled
+    // return from Auth0) in the Auth_Error_Banner. The SDK leaves
+    // isAuthenticated$ at false, so the Auth_Control returns to the
+    // Unauthenticated_State on its own. (Requirements 1.7, 5.4)
+    this.auth.error$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.authError = true;
+        this.cdr.detectChanges();
+      });
+
+    // Surface authentication *initiation* failures (a failed login/logout
+    // redirect from AuthButtonComponent) in the Auth_Error_Banner via the
+    // shared AuthErrorState channel — avoiding shell↔child coupling.
+    // (Requirements 2.4, 3.4)
+    this.authErrors.message$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(message => {
+        if (message) {
+          this.authError = true;
+          this.authErrorMessage = message;
+          this.cdr.detectChanges();
+        }
+      });
+
     this.loadServices(this.selectedMonth);
   }
 
@@ -90,6 +121,7 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
     this.loading = true;
     this.error = null;
     this.authError = false;
+    this.authErrorMessage = null;
 
     const displayFrom = month.clone().startOf('month').format('YYYY-MM-DD');
     const displayTo = month.clone().endOf('month').format('YYYY-MM-DD');
@@ -105,6 +137,9 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
         this.displayServices = displaySvcs.map(svc => this.toViewModel(svc));
         this.servicePairs = this.chunkPairs(this.displayServices);
         this.loading = false;
+        // A successful load means auth is healthy again; clear any lingering
+        // initiation-failure message so the banner does not stay stuck.
+        this.authErrors.clear();
         this.cdr.detectChanges();
         this.allDropLists = this.dropLists.toArray();
       },
