@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+﻿import * as fs from 'fs';
 import * as path from 'path';
 import { initAssociations } from '../models/associations';
 import { Song } from '../models/Song';
@@ -10,6 +10,25 @@ interface CsvRow {
   translationNumber: string;
 }
 
+/**
+ * Resolve the canonical pipe-delimited repertoire CSV. Prefers the copy bundled
+ * into the API image under assets/, and falls back to the repo-root .data copy
+ * for local development.
+ */
+function resolveCsvPath(): string {
+  const candidates = [
+    path.resolve(__dirname, '../../assets/repertoir.csv'),
+    path.resolve(__dirname, '../../../.data/repertoir.csv'),
+    path.resolve(__dirname, '../../../../.data/repertoir.csv'),
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  throw new Error(`repertoir.csv not found. Looked in:\n  ${candidates.join('\n  ')}`);
+}
+
 function parseCsv(filePath: string): CsvRow[] {
   const raw = fs.readFileSync(filePath, 'utf-8');
   const lines = raw.split(/\r?\n/).filter((line) => line.trim() !== '');
@@ -18,8 +37,8 @@ function parseCsv(filePath: string): CsvRow[] {
   const [, ...dataLines] = lines;
 
   return dataLines.map((line) => {
-    // CSV format: Hymnal,Number,Name,TranslationNumber_HymnalE
-    const parts = line.split(',');
+    // Pipe-delimited format: Hymnal|Number|Name|TranslationNumber_HymnalE (names contain commas)
+    const parts = line.split('|');
     return {
       hymnal: parts[0]?.trim() ?? '',
       number: parts[1]?.trim() ?? '',
@@ -32,7 +51,7 @@ function parseCsv(filePath: string): CsvRow[] {
 export async function seedSongsFromCsv(): Promise<void> {
   initAssociations();
 
-  const filePath = path.resolve(__dirname, '../../../.data/repertoir.csv');
+  const filePath = resolveCsvPath();
   const rows = parseCsv(filePath);
 
   console.log(`Parsed ${rows.length} rows from CSV.`);

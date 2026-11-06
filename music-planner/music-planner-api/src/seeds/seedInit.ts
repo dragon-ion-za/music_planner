@@ -1,7 +1,7 @@
 ﻿import sequelize from '../db/sequelize';
 import { seedCongregation } from './seedCongregation';
 import { seedSlotTemplates } from './seedSlotTemplates';
-import { seedSongs } from './seedSongs';
+import { seedSongsFromCsv } from './seedSongsFromCsv';
 
 /**
  * Idempotent initial-data seed used by the Docker one-shot init step.
@@ -10,15 +10,15 @@ import { seedSongs } from './seedSongs';
  *  1. The first congregation ("Brentwood Park").
  *  2. Its default slot templates (congregation id passed in-process, no stdout
  *     parsing needed).
- *  3. The song repertoire from assets/repertoire.json (bundled into the API
- *     image; congregation-independent).
+ *  3. The song repertoire from the canonical pipe-delimited .data/repertoir.csv
+ *     (congregation-independent).
  *
  * All underlying seeds use find-or-create / upsert, so re-running is safe.
  */
 export async function seedInit(): Promise<void> {
   const congregation = await seedCongregation();
   await seedSlotTemplates(congregation.id);
-  await seedSongs();
+  await seedSongsFromCsv();
   console.log('Initial data seed complete.');
 }
 

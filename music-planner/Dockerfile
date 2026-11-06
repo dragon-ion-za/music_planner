@@ -24,7 +24,7 @@ FROM node:20-alpine AS api-runner
 WORKDIR /app
 COPY --from=api-builder /app/music-planner-api/dist ./dist
 COPY --from=api-builder /app/music-planner-api/node_modules ./node_modules
-# Seed data assets (e.g. repertoire.json) read at runtime by the song seed.
+# Seed data assets (e.g. repertoir.csv) read at runtime by the song seed.
 # seedSongs resolves this as dist/../assets, i.e. /app/assets.
 COPY --from=api-builder /app/music-planner-api/assets ./assets
 EXPOSE 3000

@@ -12,10 +12,9 @@
     "seed:init:prod": "node dist/seeds/seedInit.js",
     "seed:congregation": "ts-node src/seeds/seedCongregation.ts",
     "seed:congregation:prod": "node dist/seeds/seedCongregation.js",
-    "seed:songs": "ts-node src/seeds/seedSongs.ts",
-    "seed:songs:csv": "ts-node src/seeds/seedSongsFromCsv.ts",
+    "seed:songs": "ts-node src/seeds/seedSongsFromCsv.ts",
+    "seed:songs:prod": "node dist/seeds/seedSongsFromCsv.js",
     "seed:slots": "ts-node src/seeds/seedSlotTemplates.ts",
-    "seed:import": "ts-node src/seeds/importSchedule.ts",
     "test": "jest --no-coverage"
   },
   "dependencies": {

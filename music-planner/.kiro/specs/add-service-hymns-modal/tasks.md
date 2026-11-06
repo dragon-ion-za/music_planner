@@ -163,7 +163,7 @@ Implement the Add Service Hymns Modal end-to-end: frontend model additions, the 
     - Slot with `songNumber` not found in DB → creates slot with `songId: null`
     - _Requirements: 6.3_
 
-- [~] 9. Final checkpoint — full test suite passes
+- [ ] 9. Final checkpoint — full test suite passes
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
