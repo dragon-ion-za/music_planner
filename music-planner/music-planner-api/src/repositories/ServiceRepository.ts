@@ -18,13 +18,16 @@ export interface SlotInput {
 const SERVICE_INCLUDE = [
   {
     model: ServiceSlot,
+    as: 'serviceSlots',
     include: [
       {
         model: SlotTemplate,
+        as: 'slotTemplate',
         attributes: ['slotKey', 'displayOrder', 'category'],
       },
       {
         model: Song,
+        as: 'song',
         attributes: ['number', 'hymnal', 'familiarity'],
         include: [
           {
@@ -37,6 +40,21 @@ const SERVICE_INCLUDE = [
     ],
   },
 ];
+
+// Slot templates are only seeded for 'Sunday Service', but services of other
+// types (Midweek Service, Palm Sunday, ...) share the same slot layout and were
+// imported against those templates. Prefer an exact serviceType match, then fall
+// back to any template for the congregation with the same slotKey. Without the
+// fallback, updates for those services silently matched no template and were skipped.
+async function findTemplate(
+  congregationId: string,
+  serviceType: string,
+  slotKey: string,
+): Promise<SlotTemplate | null> {
+  const exact = await SlotTemplate.findOne({ where: { congregationId, serviceType, slotKey } });
+  if (exact) return exact;
+  return SlotTemplate.findOne({ where: { congregationId, slotKey }, order: [['serviceType', 'ASC']] });
+}
 
 export const ServiceRepository = {
   async findByCongregation(congregationId: string, dateRange?: DateRange): Promise<Service[]> {
@@ -71,9 +89,7 @@ export const ServiceRepository = {
 
     if (Array.isArray(slots)) {
       for (const entry of slots) {
-        const template = await SlotTemplate.findOne({
-          where: { congregationId, serviceType, slotKey: entry.slotKey },
-        });
+        const template = await findTemplate(congregationId, serviceType, entry.slotKey);
         if (template) {
           let resolvedSongId: string | null = null;
           if (entry.songId !== undefined && entry.songId !== null) {
@@ -100,9 +116,7 @@ export const ServiceRepository = {
     slots: SlotInput[],
   ): Promise<Service> {
     for (const entry of slots) {
-      const template = await SlotTemplate.findOne({
-        where: { congregationId, serviceType: service.serviceType, slotKey: entry.slotKey },
-      });
+      const template = await findTemplate(congregationId, service.serviceType, entry.slotKey);
       if (!template) continue;
 
       const existing = await ServiceSlot.findOne({

@@ -18,8 +18,8 @@ export function buildModalConflictMap(
 ): ModalConflictMap {
   // Step 1: Build occurrences from window services
   const windowOccurrences = windowServices.flatMap(svc =>
-    svc.serviceSlots
-      .filter(slot => slot.song !== null)
+    (svc.serviceSlots ?? [])
+      .filter(slot => slot.song != null)
       .map(slot => ({
         slotId:          slot.id,
         serviceId:       svc.id,

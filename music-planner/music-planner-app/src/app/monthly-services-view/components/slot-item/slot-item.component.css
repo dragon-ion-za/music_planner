@@ -13,6 +13,13 @@
   cursor: grabbing;
 }
 
+/* Slot currently under the dragged item: shows where the swap will happen */
+.slot-item.drop-target {
+  outline: 2px dashed #3f51b5;
+  outline-offset: -2px;
+  background-color: rgba(63, 81, 181, 0.12);
+}
+
 .conflict-red {
   background-color: rgba(244, 67, 54, 0.15);
   border-color: rgba(244, 67, 54, 0.5);

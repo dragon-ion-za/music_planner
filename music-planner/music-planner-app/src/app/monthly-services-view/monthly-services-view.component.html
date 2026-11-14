@@ -21,24 +21,28 @@
     <p>No services scheduled for this month.</p>
   </div>
 
+  <!-- connects every service card's drop list to the others.
+       (A @ViewChildren query here can't see lists inside child components.) -->
   <div class="service-grid" *ngIf="!loading && !error && !authError && displayServices.length > 0">
     <div class="grid-row" *ngFor="let pair of servicePairs">
       <app-service-card
         *ngIf="pair[0]"
         [service]="pair[0]!"
         [conflictMap]="conflictMap"
-        [allDropLists]="allDropLists"
         [swapping]="swapping"
-        (dropped)="onDrop($event)"
+        [hoverSlotId]="hoverSlotId"
+        (slotDragMoved)="onSlotDragMoved($event)"
+        (slotDropped)="onSlotDropped($event)"
       ></app-service-card>
       <div class="grid-cell-empty" *ngIf="!pair[0]"></div>
       <app-service-card
         *ngIf="pair[1]"
         [service]="pair[1]!"
         [conflictMap]="conflictMap"
-        [allDropLists]="allDropLists"
         [swapping]="swapping"
-        (dropped)="onDrop($event)"
+        [hoverSlotId]="hoverSlotId"
+        (slotDragMoved)="onSlotDragMoved($event)"
+        (slotDropped)="onSlotDropped($event)"
       ></app-service-card>
       <div class="grid-cell-empty" *ngIf="!pair[1]"></div>
     </div>

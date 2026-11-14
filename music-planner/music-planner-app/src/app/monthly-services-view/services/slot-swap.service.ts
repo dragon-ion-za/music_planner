@@ -7,6 +7,23 @@ import { Service, ServiceSlotViewModel, ServiceViewModel, SlotInput } from '../m
 export class SlotSwapService {
   constructor(private servicesApiService: ServicesApiService) {}
 
+  /**
+   * Swap two slots that belong to the same service with a single PUT. Two
+   * separate PUTs (as in swap()) would each send the whole slot list and the
+   * second would overwrite the first.
+   */
+  swapWithinService(
+    service: ServiceViewModel,
+    slotA: ServiceSlotViewModel,
+    slotB: ServiceSlotViewModel
+  ): Observable<Service> {
+    const slots: SlotInput[] = service.serviceSlots.map(s => ({
+      slotKey: s.slotTemplate.slotKey,
+      songId: s.id === slotA.id ? slotB.songId : s.id === slotB.id ? slotA.songId : s.songId
+    }));
+    return this.servicesApiService.updateServiceSlots(service.id, slots);
+  }
+
   swap(
     sourceSlot: ServiceSlotViewModel,
     targetSlot: ServiceSlotViewModel,

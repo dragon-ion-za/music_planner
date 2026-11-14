@@ -1,4 +1,4 @@
-<div class="slot-item" [class]="conflictClass" cdkDrag [cdkDragData]="slot" [cdkDragDisabled]="disabled" [matTooltip]="tooltipText">
+<div class="slot-item" [class]="conflictClass" [attr.data-slot-id]="slot.id" [class.drop-target]="dropTarget" cdkDrag (cdkDragMoved)="onDragMoved($event)" (cdkDragEnded)="onDragEnded($event)" [cdkDragData]="slot" [cdkDragDisabled]="disabled" [matTooltip]="tooltipText">
   <ng-container *ngIf="slot.songId; else emptySlot">
     <span class="slot-key">{{ slot.slotTemplate.slotKey }}</span>
     <span class="song-number">{{ slot.song?.number }}</span>

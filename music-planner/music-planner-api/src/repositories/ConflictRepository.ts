@@ -30,6 +30,7 @@ export const ConflictRepository = {
         },
         {
           model: SlotTemplate,
+          as: 'slotTemplate',
           attributes: ['slotKey'],
         },
       ],

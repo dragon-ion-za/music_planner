@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef, DestroyRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CdkDropList, CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -36,14 +37,15 @@ import {
   templateUrl: './monthly-services-view.component.html',
   styleUrl: './monthly-services-view.component.css'
 })
-export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
-  @ViewChildren(CdkDropList) dropLists!: QueryList<CdkDropList>;
-
+export class MonthlyServicesViewComponent implements OnInit {
   selectedMonth: moment.Moment = moment().startOf('month');
   displayServices: ServiceViewModel[] = [];
   servicePairs: (ServiceViewModel | null)[][] = [];
   conflictMap: ConflictMap = {};
-  allDropLists: CdkDropList[] = [];
+  // Slot currently under a dragged item (valid swap target), for highlighting
+  hoverSlotId: string | null = null;
+  // Full ±12 month window used for conflict detection (superset of displayServices)
+  private windowServices: Service[] = [];
 
   loading = false;
   swapping = false;
@@ -93,13 +95,6 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
     this.loadServices(this.selectedMonth);
   }
 
-  ngAfterViewInit(): void {
-    this.dropLists.changes.subscribe(() => {
-      this.allDropLists = this.dropLists.toArray();
-      this.cdr.detectChanges();
-    });
-  }
-
   onMonthChange(month: moment.Moment): void {
     this.selectedMonth = month;
     this.loadServices(month);
@@ -133,6 +128,7 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
       this.servicesApiService.getServices(conflictFrom, conflictTo)
     ]).subscribe({
       next: ([displaySvcs, allSvcs]) => {
+        this.windowServices = allSvcs;
         this.conflictMap = this.conflictDetectionService.buildConflictMap(allSvcs);
         this.displayServices = displaySvcs.map(svc => this.toViewModel(svc));
         this.servicePairs = this.chunkPairs(this.displayServices);
@@ -141,7 +137,6 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
         // initiation-failure message so the banner does not stay stuck.
         this.authErrors.clear();
         this.cdr.detectChanges();
-        this.allDropLists = this.dropLists.toArray();
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
@@ -161,11 +156,24 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onDrop(event: CdkDragDrop<ServiceSlotViewModel[]>): void {
-    if (event.previousContainer === event.container) return;
+  onSlotDragMoved(event: { slot: ServiceSlotViewModel; point: { x: number; y: number } }): void {
+    const allSlots = this.displayServices.flatMap(s => s.serviceSlots);
+    const target = this.findSlotAtPoint(event.point, allSlots, event.slot.id);
+    const id = target ? target.id : null;
+    if (id !== this.hoverSlotId) this.hoverSlotId = id;
+  }
 
-    const sourceSlot: ServiceSlotViewModel = event.item.data;
-    const targetSlot: ServiceSlotViewModel = event.container.data[event.currentIndex];
+  onSlotDropped(event: { slot: ServiceSlotViewModel; point: { x: number; y: number } }): void {
+    this.hoverSlotId = null;
+    if (this.swapping) return;
+    const sourceSlot = event.slot;
+
+    // The drop lists are deliberately not connected, so the drag placeholder
+    // never moves into another card (that made the first slot the pointer
+    // touched the only possible target). Instead, find whichever slot is under
+    // the pointer when the drag ends, in any service card.
+    const allSlots = this.displayServices.flatMap(s => s.serviceSlots);
+    const targetSlot = this.findSlotAtPoint(event.point, allSlots, sourceSlot.id);
     if (!targetSlot) return;
 
     const sourceServiceId = sourceSlot.serviceId;
@@ -175,6 +183,15 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
     const targetService = this.displayServices.find(s => s.id === targetServiceId);
     if (!sourceService || !targetService) return;
 
+    // Build the swap request BEFORE the optimistic update: swap() computes its
+    // payload from the slots' current songIds, so mutating them first would make
+    // both PUTs a no-op (each slot would be sent its own song back).
+    // Same-service swaps use one PUT; cross-service swaps use one PUT per service.
+    const swap$: Observable<[Service, Service]> = sourceService.id === targetService.id
+      ? this.slotSwapService.swapWithinService(sourceService, sourceSlot, targetSlot)
+          .pipe(map(updated => [updated, updated] as [Service, Service]))
+      : this.slotSwapService.swap(sourceSlot, targetSlot, sourceService, targetService);
+
     // Optimistic swap
     const origSourceSongId = sourceSlot.songId;
     const origTargetSongId = targetSlot.songId;
@@ -183,14 +200,18 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
 
     this.swapping = true;
 
-    this.slotSwapService.swap(sourceSlot, targetSlot, sourceService, targetService).subscribe({
+    swap$.subscribe({
       next: ([updatedSource, updatedTarget]) => {
         const srcIdx = this.displayServices.findIndex(s => s.id === updatedSource.id);
         const tgtIdx = this.displayServices.findIndex(s => s.id === updatedTarget.id);
         if (srcIdx !== -1) this.displayServices[srcIdx] = this.toViewModel(updatedSource);
         if (tgtIdx !== -1) this.displayServices[tgtIdx] = this.toViewModel(updatedTarget);
         this.servicePairs = this.chunkPairs(this.displayServices);
-        this.conflictMap = this.conflictDetectionService.buildConflictMap(this.displayServices);
+        // Rebuild against the full conflict window, with the two updated services swapped in
+        this.windowServices = this.windowServices.map(s =>
+          s.id === updatedSource.id ? updatedSource : s.id === updatedTarget.id ? updatedTarget : s
+        );
+        this.conflictMap = this.conflictDetectionService.buildConflictMap(this.windowServices);
         this.swapping = false;
       },
       error: () => {
@@ -203,8 +224,24 @@ export class MonthlyServicesViewComponent implements OnInit, AfterViewInit {
     });
   }
 
+  private findSlotAtPoint(
+    point: { x: number; y: number },
+    candidates: ServiceSlotViewModel[],
+    excludeSlotId: string
+  ): ServiceSlotViewModel | undefined {
+    const elements = document.elementsFromPoint(point.x, point.y);
+    for (const el of elements) {
+      const slotEl = el.closest('[data-slot-id]');
+      const id = slotEl?.getAttribute('data-slot-id');
+      if (!id || id === excludeSlotId) continue;
+      const match = candidates.find(s => s.id === id);
+      if (match) return match;
+    }
+    return undefined;
+  }
+
   private toViewModel(svc: Service): ServiceViewModel {
-    const slotViewModels: ServiceSlotViewModel[] = svc.serviceSlots.map(slot => ({
+    const slotViewModels: ServiceSlotViewModel[] = (svc.serviceSlots ?? []).map(slot => ({
       ...slot,
       canonicalNumber: slot.song?.translationOf?.number ?? slot.song?.number ?? ''
     }));

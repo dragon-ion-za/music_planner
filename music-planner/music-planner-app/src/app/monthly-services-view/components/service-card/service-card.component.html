@@ -8,9 +8,7 @@
       cdkDropList
       [id]="'service-' + service.id"
       [cdkDropListData]="service.serviceSlots"
-      [cdkDropListConnectedTo]="allDropLists"
       cdkDropListSortingDisabled
-      (cdkDropListDropped)="onDrop($event)"
     >
       <div class="slot-group" *ngFor="let group of service.slotGroups">
         <div class="category-label">{{ group.category }}</div>
@@ -19,6 +17,9 @@
           [slot]="slot"
           [conflict]="conflictMap[slot.id] ?? null"
           [disabled]="swapping"
+          [dropTarget]="slot.id === hoverSlotId"
+          (slotDragMoved)="slotDragMoved.emit($event)"
+          (slotDropped)="slotDropped.emit($event)"
         ></app-slot-item>
       </div>
     </div>

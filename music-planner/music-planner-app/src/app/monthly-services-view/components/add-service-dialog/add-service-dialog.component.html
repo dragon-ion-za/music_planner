@@ -31,10 +31,10 @@
     </mat-form-field>
 
     <!-- Song Slots grouped by category -->
-    <ng-container *ngFor="let group of slotGroups">
+    <ng-container *ngFor="let group of slotGroups; trackBy: trackByCategory">
       <h3 class="category-header">{{ group.category | titlecase }}</h3>
       <div class="slot-grid">
-        <div *ngFor="let slot of group.slots" class="slot-wrapper">
+        <div *ngFor="let slot of group.slots; trackBy: trackBySlotKey" class="slot-wrapper">
           <mat-form-field appearance="outline" class="slot-field">
             <mat-label>{{ slot.slotKey }}</mat-label>
             <input matInput

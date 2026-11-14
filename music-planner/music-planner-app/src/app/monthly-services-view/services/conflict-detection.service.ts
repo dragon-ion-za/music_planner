@@ -9,8 +9,9 @@ export class ConflictDetectionService {
 
     // Build flat list of all occupied slot occurrences
     const occurrences = allServices.flatMap(svc =>
-      svc.serviceSlots
-        .filter(slot => slot.songId !== null && slot.song !== null)
+      // Services with no slots may arrive with serviceSlots missing/null
+      (svc.serviceSlots ?? [])
+        .filter(slot => slot.songId != null && slot.song != null)
         .map(slot => ({
           slotId: slot.id,
           serviceId: svc.id,

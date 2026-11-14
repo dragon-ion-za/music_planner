@@ -7,7 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -37,6 +38,16 @@ export const SLOT_TEMPLATES = [
   { slotKey: 'congregationCM2',  category: 'congregation'  as const, displayOrder: 14 },
 ];
 
+export const DIALOG_DATE_FORMATS = {
+  parse: { dateInput: ['YYYY-MM-DD', 'LL'] },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 export interface SlotState {
   slotKey: string;
   category: 'orchestra' | 'choir' | 'congregation';
@@ -58,7 +69,6 @@ export interface SlotState {
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatMomentDateModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
@@ -66,6 +76,14 @@ export interface SlotState {
   ],
   templateUrl: './add-service-dialog.component.html',
   styleUrl: './add-service-dialog.component.css',
+  // Provided on the component (same approach as ScheduleComponent) rather than
+  // via MatMomentDateModule: NgModule providers imported into a dialog's
+  // standalone component are not reliably visible to the datepicker, which
+  // caused "NullInjectorError: No provider for DateAdapter" (minified: "we").
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: DIALOG_DATE_FORMATS },
+  ],
 })
 export class AddServiceDialogComponent implements OnInit {
   // --- form state ---
@@ -101,18 +119,31 @@ export class AddServiceDialogComponent implements OnInit {
       filteredOptions: [],
       conflictStatus: null,
     }));
+    this.buildSlotGroups();
     if (this.serviceDate) {
       this.fetchConflictWindow(this.serviceDate);
     }
   }
 
   // --- grouped slots for template rendering ---
-  get slotGroups(): { category: string; slots: SlotState[] }[] {
-    return [
-      { category: 'orchestra',    slots: this.slotStates.filter(s => s.category === 'orchestra') },
-      { category: 'choir',        slots: this.slotStates.filter(s => s.category === 'choir') },
-      { category: 'congregation', slots: this.slotStates.filter(s => s.category === 'congregation') },
-    ];
+  // Built once (not a getter): a getter returned fresh arrays/objects on every
+  // change-detection pass, so *ngFor tore down and re-created all 14 inputs
+  // (ngModel + autocomplete) each cycle and the page locked up.
+  slotGroups: { category: string; slots: SlotState[] }[] = [];
+
+  trackByCategory(_index: number, group: { category: string }): string {
+    return group.category;
+  }
+
+  trackBySlotKey(_index: number, slot: SlotState): string {
+    return slot.slotKey;
+  }
+
+  private buildSlotGroups(): void {
+    this.slotGroups = (['orchestra', 'choir', 'congregation'] as const).map(category => ({
+      category,
+      slots: this.slotStates.filter(s => s.category === category),
+    }));
   }
 
   // --- autocomplete ---

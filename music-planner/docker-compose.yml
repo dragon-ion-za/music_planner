@@ -24,6 +24,10 @@
     depends_on:
       postgres:
         condition: service_healthy
+    # Migration 007 reads .data/brentwood-schedule-latest.json, which is not
+    # baked into the image. Mount it read-only (resolves to /app/.data).
+    volumes:
+      - ./.data:/app/.data:ro
     restart: "no"
     networks:
       - music-planner-net
