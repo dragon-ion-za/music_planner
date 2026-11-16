@@ -1,0 +1,53 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Blue palette (NAC-style royal blue). Primary hue is 700 (#1f4e9c).
+$nac-blue: (
+  50: #e8eef8,
+  100: #c5d3ec,
+  200: #9fb6df,
+  300: #7898d2,
+  400: #5b82c9,
+  500: #3f6cbf,
+  600: #2f5cae,
+  700: #1f4e9c,
+  800: #173f80,
+  900: #0e2d5c,
+  A100: #b3c8f5,
+  A200: #82a4ee,
+  A400: #4f7fe6,
+  A700: #3569e0,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(0, 0, 0, 0.87),
+    A200: rgba(0, 0, 0, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$nac-primary: mat.define-palette($nac-blue, 700);
+$nac-accent: mat.define-palette($nac-blue, A400);
+$nac-warn: mat.define-palette(mat.$red-palette);
+
+$nac-theme: mat.define-light-theme((
+  color: (
+    primary: $nac-primary,
+    accent: $nac-accent,
+    warn: $nac-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-themes($nac-theme);
