@@ -1,7 +1,16 @@
 <mat-card class="service-card">
   <mat-card-header>
-    <mat-card-title>{{ service.serviceDate }}</mat-card-title>
-    <mat-card-subtitle>{{ service.serviceType }}</mat-card-subtitle>
+    <div class="header-text">
+      <mat-card-title>{{ service.serviceDate }}</mat-card-title>
+      <mat-card-subtitle>{{ service.serviceType }}</mat-card-subtitle>
+    </div>
+    <button
+      mat-stroked-button
+      class="edit-button"
+      type="button"
+      [disabled]="swapping"
+      (click)="editRequested.emit(service)"
+    >Edit</button>
   </mat-card-header>
   <mat-card-content>
     <div

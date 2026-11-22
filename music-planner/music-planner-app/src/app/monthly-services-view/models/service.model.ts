@@ -74,3 +74,5 @@ export interface CreateServicePayload {
   serviceType: string;
   slots: CreateServiceSlotInput[];
 }
+
+export type UpdateServicePayload = CreateServicePayload;

@@ -47,6 +47,16 @@
   min-height: 100px;
 }
 
+@media (max-width: 799px) {
+  .grid-row {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-cell-empty {
+    display: none;
+  }
+}
+
 /* CDK drag-drop styles */
 .cdk-drag-preview {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);

@@ -140,18 +140,18 @@ describe('PUT /api/services/:id', () => {
     const updatedService = { ...service, serviceSlots: [{ id: 'slot-1' }, { id: 'slot-2' }] };
 
     mockRepo.findById = jest.fn().mockResolvedValue(service);
-    mockRepo.upsertSlots = jest.fn().mockResolvedValue(updatedService);
+    mockRepo.update = jest.fn().mockResolvedValue(updatedService);
 
     const res = await request(app).put(`/api/services/${SERVICE_ID}`).set('Authorization', 'Bearer token').send({
       slots: [{ slotKey: 'orchestra1', songId: 'new-song' }, { slotKey: 'choir1', songId: null }],
     });
 
     expect(res.status).toBe(200);
-    expect(mockRepo.upsertSlots).toHaveBeenCalledWith(
-      service,
-      CONG_ID,
-      [{ slotKey: 'orchestra1', songId: 'new-song' }, { slotKey: 'choir1', songId: null }],
-    );
+    expect(mockRepo.update).toHaveBeenCalledWith(service, CONG_ID, {
+      serviceDate: undefined,
+      serviceType: undefined,
+      slots: [{ slotKey: 'orchestra1', songId: 'new-song' }, { slotKey: 'choir1', songId: null }],
+    });
     expect(res.body.serviceSlots).toHaveLength(2);
   });
 });

@@ -1,0 +1,254 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Add `ServiceRepository.update` and `UnknownSongError`": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357708203
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357718734
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357848159
+      }
+    ],
+    "1.2 Update the `PUT /api/services/:id` route in `routes/services.ts`": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357708321
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357852744
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357947163
+      }
+    ],
+    "2. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357708445
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358205493
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358400400
+      }
+    ],
+    "3.1 Create `service-form.util.ts` and `UpdateServicePayload`": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357708550
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357718817
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357848270
+      }
+    ],
+    "3.4 Add `excludeServiceId` to `buildModalConflictMap`": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357708659
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357719082
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357849116
+      }
+    ],
+    "3.6 Add `updateService` to `ServicesApiService`": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357708763
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357853254
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357946580
+      }
+    ],
+    "3.7 Write unit tests for `updateService`": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357708863
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357957381
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358199276
+      }
+    ],
+    "4.1 Update `AddServiceDialogComponent`": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357708956
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357957222
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358200737
+      }
+    ],
+    "4.2 Write unit tests for the dialog": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357709052
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358204220
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358399355
+      }
+    ],
+    "5.1 Add the Edit button to `ServiceCardComponent`": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357709148
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357719750
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357849378
+      }
+    ],
+    "5.2 Wire the card to the monthly view": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357709238
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357957305
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358200065
+      }
+    ],
+    "5.3 Write unit tests for card and view": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357709335
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358205010
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358399907
+      }
+    ],
+    "6. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357709442
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358403612
+      },
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358445205
+      }
+    ],
+    "1. Extend the update endpoint (music-planner-api)": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795357947263
+      }
+    ],
+    "3. Add frontend helpers and API client": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358199382
+      }
+    ],
+    "4. Make the dialog support edit mode": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358399522
+      }
+    ],
+    "5. Add the Edit entry point": [
+      {
+        "executionId": "01a1ddf1-7cf8-4a19-8845-fce885916d98",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795358400004
+      }
+    ]
+  }
+}

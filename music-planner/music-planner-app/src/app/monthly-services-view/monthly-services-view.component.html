@@ -33,6 +33,7 @@
         [hoverSlotId]="hoverSlotId"
         (slotDragMoved)="onSlotDragMoved($event)"
         (slotDropped)="onSlotDropped($event)"
+        (editRequested)="openEditServiceDialog($event)"
       ></app-service-card>
       <div class="grid-cell-empty" *ngIf="!pair[0]"></div>
       <app-service-card
@@ -43,6 +44,7 @@
         [hoverSlotId]="hoverSlotId"
         (slotDragMoved)="onSlotDragMoved($event)"
         (slotDropped)="onSlotDropped($event)"
+        (editRequested)="openEditServiceDialog($event)"
       ></app-service-card>
       <div class="grid-cell-empty" *ngIf="!pair[1]"></div>
     </div>

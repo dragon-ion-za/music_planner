@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,8 +17,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import moment from 'moment';
 import { ServicesApiService } from '../../services/services-api.service';
 import { RepertoireEntry } from '../../models/repertoire.model';
-import { Service, SlotConflictStatus, CreateServicePayload } from '../../models/service.model';
+import { Service, SlotConflictStatus } from '../../models/service.model';
 import { buildModalConflictMap, DraftSlot } from '../../services/modal-conflict.util';
+import { buildServicePayload, normalizeSongInput, slotsFromService } from '../../services/service-form.util';
 import repertoireData from '../../../../assets/repertoire.json';
 
 export const SLOT_TEMPLATES = [
@@ -106,8 +107,27 @@ export class AddServiceDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddServiceDialogComponent>,
-    private servicesApiService: ServicesApiService
+    private servicesApiService: ServicesApiService,
+    @Optional() @Inject(MAT_DIALOG_DATA) private data: { service?: Service } | null
   ) {}
+
+  get editingService(): Service | null {
+    return this.data?.service ?? null;
+  }
+
+  get isEditMode(): boolean {
+    return this.editingService !== null;
+  }
+
+  hasSong(slot: SlotState): boolean {
+    return normalizeSongInput(slot.songNumber) !== null;
+  }
+
+  /** True when the slot holds a non-empty, non-N/A value that is not in the repertoire. */
+  isUnknownSong(slot: SlotState): boolean {
+    const value = normalizeSongInput(slot.songNumber);
+    return value !== null && !this.repertoireSet.has(value);
+  }
 
   ngOnInit(): void {
     this.repertoire = (repertoireData as any).songs as RepertoireEntry[];
@@ -119,6 +139,15 @@ export class AddServiceDialogComponent implements OnInit {
       filteredOptions: [],
       conflictStatus: null,
     }));
+    if (this.isEditMode) {
+      const svc = this.editingService!;
+      this.serviceDate = moment(svc.serviceDate, 'YYYY-MM-DD');
+      this.serviceType = svc.serviceType;
+      const numbers = slotsFromService(svc);
+      for (const s of this.slotStates) {
+        s.songNumber = numbers[s.slotKey] ?? '';
+      }
+    }
     this.buildSlotGroups();
     if (this.serviceDate) {
       this.fetchConflictWindow(this.serviceDate);
@@ -191,13 +220,17 @@ export class AddServiceDialogComponent implements OnInit {
     if (!this.serviceDate) return;
     const serviceDateStr = this.serviceDate.format('YYYY-MM-DD');
     const draftSlots: DraftSlot[] = this.slotStates
-      .filter(s => s.songNumber.trim() !== '' && this.repertoireSet.has(s.songNumber))
-      .map(s => ({ slotKey: s.slotKey, songNumber: s.songNumber }));
+      .filter(s => {
+        const n = normalizeSongInput(s.songNumber);
+        return n !== null && this.repertoireSet.has(n);
+      })
+      .map(s => ({ slotKey: s.slotKey, songNumber: normalizeSongInput(s.songNumber)! }));
     const conflictMap = buildModalConflictMap(
       this.windowServices,
       draftSlots,
       serviceDateStr,
-      this.repertoireMap
+      this.repertoireMap,
+      this.editingService?.id
     );
     for (const slot of this.slotStates) {
       slot.conflictStatus = conflictMap[slot.slotKey] ?? null;
@@ -233,30 +266,33 @@ export class AddServiceDialogComponent implements OnInit {
   onSave(form: any): void {
     this.submitAttempted = true;
     // Also check that no slots have unknown songs
-    const hasUnknownSong = this.slotStates.some(
-      s => s.songNumber.trim() !== '' && !this.repertoireSet.has(s.songNumber)
-    );
+    const hasUnknownSong = this.slotStates.some(s => this.isUnknownSong(s));
     if (form.invalid || hasUnknownSong) return;
 
     this.saving = true;
     this.submitError = null;
 
-    const payload: CreateServicePayload = {
-      serviceDate: moment(this.serviceDate).format('YYYY-MM-DD'),
-      serviceType: this.serviceType,
-      slots: this.slotStates.map(s => ({
-        slotKey: s.slotKey,
-        songNumber: s.songNumber.trim() || null
-      }))
-    };
+    const payload = buildServicePayload(
+      moment(this.serviceDate),
+      this.serviceType,
+      this.slotStates
+    );
 
-    this.servicesApiService.createService(payload).subscribe({
+    const request$ = this.isEditMode
+      ? this.servicesApiService.updateService(this.editingService!.id, payload)
+      : this.servicesApiService.createService(payload);
+
+    request$.subscribe({
       next: () => this.dialogRef.close('saved'),
       error: (err: HttpErrorResponse) => {
         this.saving = false;
-        this.submitError = err.status === 409
-          ? 'A service with this date and type already exists.'
-          : `Failed to save service (${err.status}).`;
+        if (err.status === 409) {
+          this.submitError = 'A service with this date and type already exists.';
+        } else if (err.status === 400 && typeof err.error?.error === 'string') {
+          this.submitError = err.error.error;
+        } else {
+          this.submitError = `Failed to save service (${err.status}).`;
+        }
       }
     });
   }

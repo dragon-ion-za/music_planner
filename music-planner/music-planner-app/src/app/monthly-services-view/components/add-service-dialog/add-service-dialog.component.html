@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Add Service</h2>
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Service' : 'Add Service' }}</h2>
 <mat-dialog-content>
   <form #form="ngForm" class="dialog-form" [class.form-disabled]="saving">
 
@@ -48,13 +48,13 @@
                 {{ option.translation ? option.number + ' (→ ' + option.translation + ')' : option.number }}
               </mat-option>
             </mat-autocomplete>
-            <mat-error *ngIf="submitAttempted && slot.songNumber && !repertoireSet.has(slot.songNumber)">
+            <mat-error *ngIf="submitAttempted && isUnknownSong(slot)">
               Unknown song number.
             </mat-error>
           </mat-form-field>
           <!-- Conflict badge rendered after the field -->
           <span
-            *ngIf="slot.conflictStatus && slot.conflictStatus.severity && slot.songNumber"
+            *ngIf="slot.conflictStatus && slot.conflictStatus.severity && hasSong(slot)"
             class="conflict-badge"
             [class.conflict-red]="slot.conflictStatus.severity === 'red'"
             [class.conflict-yellow]="slot.conflictStatus.severity === 'yellow'"

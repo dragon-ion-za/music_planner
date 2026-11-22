@@ -78,4 +78,49 @@ describe('ServicesApiService', () => {
       { numRuns: 100 }
     );
   });
+
+  describe('updateService', () => {
+    // Validates: Requirements 7.1, 7.2
+    const originalBase = environment.apiBaseUrl;
+    const payload = {
+      serviceDate: '2024-03-10',
+      serviceType: 'Sunday AM',
+      slots: [
+        { slotKey: 'orchestra1', songNumber: 'E7' },
+        { slotKey: 'choir1', songNumber: null }
+      ]
+    };
+
+    beforeEach(() => {
+      authServiceSpy.getAccessTokenSilently.and.returnValue(of('tok-123') as any);
+    });
+
+    afterEach(() => {
+      (environment as { apiBaseUrl: string }).apiBaseUrl = originalBase;
+    });
+
+    it('sends PUT with payload body and bearer token to base URL (trailing slash stripped)', () => {
+      (environment as { apiBaseUrl: string }).apiBaseUrl = 'http://api.test/';
+
+      service.updateService('abc-1', payload).subscribe();
+
+      const req = httpMock.expectOne('http://api.test/api/services/abc-1');
+      expect(req.request.method).toBe('PUT');
+      expect(req.request.body).toEqual(payload);
+      expect(req.request.headers.get('Authorization')).toBe('Bearer tok-123');
+      req.flush({});
+    });
+
+    it('uses a relative URL when no base URL is configured', () => {
+      (environment as { apiBaseUrl: string }).apiBaseUrl = '';
+
+      service.updateService('abc-1', payload).subscribe();
+
+      const req = httpMock.expectOne('/api/services/abc-1');
+      expect(req.request.method).toBe('PUT');
+      expect(req.request.body).toEqual(payload);
+      expect(req.request.headers.get('Authorization')).toBe('Bearer tok-123');
+      req.flush({});
+    });
+  });
 });

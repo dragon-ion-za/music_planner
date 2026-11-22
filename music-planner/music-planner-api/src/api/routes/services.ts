@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { ServiceRepository } from '../../repositories/ServiceRepository';
+import { ServiceRepository, UnknownSongError } from '../../repositories/ServiceRepository';
 import { initAssociations } from '../../models/associations';
 
 initAssociations();
@@ -77,13 +77,31 @@ servicesRouter.put('/:id', async (req: Request, res: Response, next: NextFunctio
       return;
     }
 
-    const { slots } = req.body ?? {};
-    const updated = await ServiceRepository.upsertSlots(
-      service,
-      req.congregationId,
-      Array.isArray(slots) ? slots : [],
-    );
-    res.status(200).json(updated);
+    const { serviceDate, serviceType, slots } = req.body ?? {};
+
+    if (serviceDate !== undefined && (typeof serviceDate !== 'string' || !DATE_RE.test(serviceDate))) {
+      res.status(400).json({ error: 'serviceDate must be in YYYY-MM-DD format' });
+      return;
+    }
+    if (serviceType !== undefined && (typeof serviceType !== 'string' || !serviceType.trim())) {
+      res.status(400).json({ error: 'serviceType must not be blank' });
+      return;
+    }
+
+    try {
+      const updated = await ServiceRepository.update(service, req.congregationId, {
+        serviceDate,
+        serviceType: serviceType?.trim(),
+        slots: Array.isArray(slots) ? slots : undefined,
+      });
+      res.status(200).json(updated);
+    } catch (err) {
+      if (err instanceof UnknownSongError) {
+        res.status(400).json({ error: `Unknown song number: ${err.songNumber}` });
+        return;
+      }
+      throw err;
+    }
   } catch (err) {
     next(err);
   }

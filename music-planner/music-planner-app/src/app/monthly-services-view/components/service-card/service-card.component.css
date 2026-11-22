@@ -3,6 +3,20 @@
   min-height: 200px;
 }
 
+mat-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.header-text {
+  flex: 1 1 auto;
+}
+
+.edit-button {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
 .slot-group {
   margin-bottom: 12px;
 }

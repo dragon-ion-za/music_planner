@@ -15,6 +15,7 @@ import { AuthErrorState } from '../auth-error-state.service';
 import { ServicesApiService } from './services/services-api.service';
 import { ConflictDetectionService } from './services/conflict-detection.service';
 import { SlotSwapService } from './services/slot-swap.service';
+import { buildServiceRows } from './services/service-rows.util';
 import { MonthNavigatorComponent } from './components/month-navigator/month-navigator.component';
 import { ServiceCardComponent } from './components/service-card/service-card.component';
 import { AddServiceDialogComponent } from './components/add-service-dialog/add-service-dialog.component';
@@ -113,6 +114,19 @@ export class MonthlyServicesViewComponent implements OnInit {
     });
   }
 
+  openEditServiceDialog(service: Service): void {
+    const dialogRef = this.dialog.open(AddServiceDialogComponent, {
+      width: '800px',
+      disableClose: true,
+      data: { service }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'saved') {
+        this.loadServices(this.selectedMonth);
+      }
+    });
+  }
+
   loadServices(month: moment.Moment): void {
     this.loading = true;
     this.error = null;
@@ -132,7 +146,7 @@ export class MonthlyServicesViewComponent implements OnInit {
         this.windowServices = allSvcs;
         this.conflictMap = this.conflictDetectionService.buildConflictMap(allSvcs);
         this.displayServices = displaySvcs.map(svc => this.toViewModel(svc));
-        this.servicePairs = this.chunkPairs(this.displayServices);
+        this.servicePairs = buildServiceRows(this.displayServices);
         this.loading = false;
         // A successful load means auth is healthy again; clear any lingering
         // initiation-failure message so the banner does not stay stuck.
@@ -209,7 +223,7 @@ export class MonthlyServicesViewComponent implements OnInit {
         const tgtIdx = this.displayServices.findIndex(s => s.id === updatedTarget.id);
         if (srcIdx !== -1) this.displayServices[srcIdx] = this.toViewModel(updatedSource);
         if (tgtIdx !== -1) this.displayServices[tgtIdx] = this.toViewModel(updatedTarget);
-        this.servicePairs = this.chunkPairs(this.displayServices);
+        this.servicePairs = buildServiceRows(this.displayServices);
         // Rebuild against the full conflict window, with the two updated services swapped in
         this.windowServices = this.windowServices.map(s =>
           s.id === updatedSource.id ? updatedSource : s.id === updatedTarget.id ? updatedTarget : s
@@ -276,13 +290,5 @@ export class MonthlyServicesViewComponent implements OnInit {
       }));
 
     return { ...svc, serviceSlots: slotViewModels, slotGroups };
-  }
-
-  private chunkPairs(services: ServiceViewModel[]): (ServiceViewModel | null)[][] {
-    const pairs: (ServiceViewModel | null)[][] = [];
-    for (let i = 0; i < services.length; i += 2) {
-      pairs.push([services[i], services[i + 1] ?? null]);
-    }
-    return pairs;
   }
 }

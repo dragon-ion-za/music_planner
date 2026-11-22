@@ -1,4 +1,4 @@
-import { Op } from 'sequelize';
+import { Op, Transaction } from 'sequelize';
 import { Service } from '../models/Service';
 import { ServiceSlot } from '../models/ServiceSlot';
 import { SlotTemplate } from '../models/SlotTemplate';
@@ -50,10 +50,42 @@ async function findTemplate(
   congregationId: string,
   serviceType: string,
   slotKey: string,
+  transaction?: Transaction,
 ): Promise<SlotTemplate | null> {
-  const exact = await SlotTemplate.findOne({ where: { congregationId, serviceType, slotKey } });
+  const exact = await SlotTemplate.findOne({ where: { congregationId, serviceType, slotKey }, transaction });
   if (exact) return exact;
-  return SlotTemplate.findOne({ where: { congregationId, slotKey }, order: [['serviceType', 'ASC']] });
+  return SlotTemplate.findOne({ where: { congregationId, slotKey }, order: [['serviceType', 'ASC']], transaction });
+}
+
+export class UnknownSongError extends Error {
+  constructor(public songNumber: string) {
+    super('Unknown song number: ' + songNumber);
+    this.name = 'UnknownSongError';
+    Object.setPrototypeOf(this, UnknownSongError.prototype);
+  }
+}
+
+export interface ServiceChanges {
+  serviceDate?: string;
+  serviceType?: string;
+  slots?: SlotInput[];
+}
+
+// songId present (even null) is used as-is; otherwise songNumber is looked up.
+// strictNumbers: throw UnknownSongError for unknown numbers instead of returning null.
+async function resolveSongId(
+  entry: SlotInput,
+  strictNumbers: boolean,
+  transaction?: Transaction,
+): Promise<string | null> {
+  if (entry.songId !== undefined) return entry.songId;
+  if (entry.songNumber === undefined || entry.songNumber === null) return null;
+  const song = await Song.findOne({ where: { number: entry.songNumber }, transaction });
+  if (!song) {
+    if (strictNumbers) throw new UnknownSongError(entry.songNumber);
+    return null;
+  }
+  return song.id;
 }
 
 export const ServiceRepository = {
@@ -91,13 +123,7 @@ export const ServiceRepository = {
       for (const entry of slots) {
         const template = await findTemplate(congregationId, serviceType, entry.slotKey);
         if (template) {
-          let resolvedSongId: string | null = null;
-          if (entry.songId !== undefined && entry.songId !== null) {
-            resolvedSongId = entry.songId;
-          } else if (entry.songNumber) {
-            const song = await Song.findOne({ where: { number: entry.songNumber } });
-            resolvedSongId = song?.id ?? null;
-          }
+          const resolvedSongId = await resolveSongId(entry, false);
           await ServiceSlot.create({
             serviceId: service.id,
             slotTemplateId: template.id,
@@ -132,6 +158,47 @@ export const ServiceRepository = {
         });
       }
     }
+
+    return (await ServiceRepository.findByIdWithSlots(service.id))!;
+  },
+
+  async update(
+    service: Service,
+    congregationId: string,
+    changes: ServiceChanges,
+  ): Promise<Service> {
+    const sequelize = Service.sequelize!;
+    await sequelize.transaction(async (transaction) => {
+      const slots = changes.slots ?? [];
+      const resolved: { entry: SlotInput; songId: string | null }[] = [];
+      for (const entry of slots) {
+        resolved.push({ entry, songId: await resolveSongId(entry, true, transaction) });
+      }
+
+      const fields: { serviceDate?: string; serviceType?: string } = {};
+      if (changes.serviceDate !== undefined) fields.serviceDate = changes.serviceDate;
+      if (changes.serviceType !== undefined) fields.serviceType = changes.serviceType;
+      if (Object.keys(fields).length > 0) {
+        await service.update(fields, { transaction });
+      }
+
+      for (const { entry, songId } of resolved) {
+        const template = await findTemplate(congregationId, service.serviceType, entry.slotKey, transaction);
+        if (!template) continue;
+        const existing = await ServiceSlot.findOne({
+          where: { serviceId: service.id, slotTemplateId: template.id },
+          transaction,
+        });
+        if (existing) {
+          await existing.update({ songId }, { transaction });
+        } else {
+          await ServiceSlot.create(
+            { serviceId: service.id, slotTemplateId: template.id, songId },
+            { transaction },
+          );
+        }
+      }
+    });
 
     return (await ServiceRepository.findByIdWithSlots(service.id))!;
   },

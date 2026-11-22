@@ -14,10 +14,14 @@ export function buildModalConflictMap(
   windowServices: Service[],
   draftSlots: DraftSlot[],
   serviceDate: string,             // YYYY-MM-DD — date of the draft service
-  repertoireMap: Map<string, RepertoireEntry>
+  repertoireMap: Map<string, RepertoireEntry>,
+  excludeServiceId?: string        // service being edited; omitted from the window
 ): ModalConflictMap {
-  // Step 1: Build occurrences from window services
-  const windowOccurrences = windowServices.flatMap(svc =>
+  // Step 1: Build occurrences from window services (minus the excluded service)
+  const filteredServices = excludeServiceId
+    ? windowServices.filter(svc => svc.id !== excludeServiceId)
+    : windowServices;
+  const windowOccurrences = filteredServices.flatMap(svc =>
     (svc.serviceSlots ?? [])
       .filter(slot => slot.song != null)
       .map(slot => ({
