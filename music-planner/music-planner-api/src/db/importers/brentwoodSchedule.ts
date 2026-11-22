@@ -41,9 +41,28 @@ export interface ImportSummary {
   slotsWithoutSong: number;
 }
 
-export function parseDate(isoString: string): string {
-  // Store the calendar date portion only (matches Service.serviceDate DATEONLY).
-  return isoString.substring(0, 10);
+export function parseDate(
+  isoString: string,
+  timeZone: string = CONGREGATION_TIMEZONE,
+): string {
+  // Date-only values are already calendar dates; return them unchanged.
+  if (/^\d{4}-\d{2}-\d{2}$/.test(isoString)) {
+    return isoString;
+  }
+  const instant = new Date(isoString);
+  if (Number.isNaN(instant.getTime())) {
+    throw new Error(`Invalid date string: "${isoString}"`);
+  }
+  // The schedule stores instants (e.g. local midnight as a UTC timestamp), so the
+  // calendar date must be taken in the congregation's timezone, not UTC.
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(instant);
+  const get = (type: string) => parts.find((p) => p.type === type)!.value;
+  return `${get('year')}-${get('month')}-${get('day')}`;
 }
 
 export function isEmptySong(rawNumber: string): boolean {

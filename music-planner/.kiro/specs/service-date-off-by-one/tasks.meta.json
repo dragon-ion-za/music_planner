@@ -1,0 +1,153 @@
+{
+  "pbtResults": {
+    "3.3 Verify bug condition exploration test now passes": {
+      "status": "passed",
+      "lastRunTimestamp": 1795359625256
+    }
+  },
+  "executionHistory": {
+    "1. Write bug condition exploration test": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359268439
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359272940
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359395432
+      }
+    ],
+    "2. Write preservation property tests (BEFORE implementing fix)": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359268520
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359398853
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359471054
+      }
+    ],
+    "3.1 Fix `parseDate` in the importer": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359268615
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359474517
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359524328
+      }
+    ],
+    "3.2 Add data migration 010 to correct already-imported services": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359268699
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359529166
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359608382
+      }
+    ],
+    "3.3 Verify bug condition exploration test now passes": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359268784
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359609149
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359647161
+      }
+    ],
+    "3.4 Verify preservation tests still pass": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359268866
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359609713
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359646612
+      }
+    ],
+    "3.5 Integration check on a database": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359268953
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359701725
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359835049
+      }
+    ],
+    "4. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359269061
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359835724
+      },
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359886687
+      }
+    ],
+    "3. Fix for service dates stored one day early": [
+      {
+        "executionId": "7f186450-c00d-4669-a6f1-27066cd28084",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795359835131
+      }
+    ]
+  }
+}
