@@ -1,0 +1,332 @@
+{
+  "pbtResults": {
+    "17.3 Write property test for hymn display text": {
+      "status": "passed",
+      "lastRunTimestamp": 1795291179385
+    },
+    "17.4 Write property test for slot label mapping": {
+      "status": "passed",
+      "lastRunTimestamp": 1795291179581
+    },
+    "15.8 Write property test for backfill idempotence": {
+      "status": "passed",
+      "lastRunTimestamp": 1795291797591
+    },
+    "15.7 Write property test for hymn name round trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1795291884464
+    }
+  },
+  "executionHistory": {
+    "15.1 Add `name` to the Song model": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290790292
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290797950
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290860543
+      }
+    ],
+    "15.2 Update `seedSongsFromCsv.ts` (exports, includeName option, explicit fields)": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290791051
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290798723
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290861108
+      }
+    ],
+    "15.3 Update migration 006 to seed without `name`": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290791256
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290865045
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290917822
+      }
+    ],
+    "15.4 Create migration `008-add-song-name.ts`": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290791395
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290865532
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290918262
+      }
+    ],
+    "15.5 Return `name` from `ServiceRepository`": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290791529
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290923018
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290971861
+      }
+    ],
+    "15.6 Write unit tests for migration 008 and repository": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290791635
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291049173
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291672268
+      }
+    ],
+    "16. Checkpoint — Ensure backend tests pass": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290791765
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291899249
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795292123383
+      }
+    ],
+    "17.1 Update the `Song` model": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290791861
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290799030
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290861891
+      }
+    ],
+    "17.2 Create `models/slot-labels.ts`": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290791992
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290866082
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290918843
+      }
+    ],
+    "18.1 Populate `slotLabel` and `hymnDisplayText` in view models": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290792105
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290923607
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290972624
+      }
+    ],
+    "18.2 Update `SlotItemComponent` template and CSS": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290792229
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291049238
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291672831
+      }
+    ],
+    "18.3 Write unit tests for slot item rendering": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290792329
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291677502
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291895725
+      }
+    ],
+    "19. Final checkpoint — Ensure all tests pass": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290792455
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291899720
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795292123873
+      }
+    ],
+    "17. Frontend: models and slot label helpers (`music-planner-app`)": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795290919834
+      }
+    ],
+    "15.7 Write property test for hymn name round trip": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291033093
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291677338
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291894627
+      }
+    ],
+    "15.8 Write property test for backfill idempotence": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291033646
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291677412
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291895424
+      }
+    ],
+    "17.3 Write property test for hymn display text": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291034435
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291049016
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291672014
+      }
+    ],
+    "17.4 Write property test for slot label mapping": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291034954
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291049089
+      },
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291672104
+      }
+    ],
+    "15. Backend: persist hymn names (`music-planner-api`)": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291672372
+      }
+    ],
+    "18. Frontend: populate and render labels": [
+      {
+        "executionId": "341fab55-c7b1-4085-84cf-1a9b3f89fa13",
+        "chatSessionId": "sess_b88d5f79-8258-4fd6-81e9-8aeb7e95bb96",
+        "timestamp": 1795291895815
+      }
+    ]
+  }
+}

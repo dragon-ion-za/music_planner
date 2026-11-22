@@ -35,26 +35,23 @@
   border-color: rgba(76, 175, 80, 0.5);
 }
 
-.slot-key {
+.slot-label {
+  flex: 0 0 110px;
   font-weight: 600;
-  min-width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.song-number {
+.slot-song {
+  flex: 1 1 auto;
+  min-width: 0;
   font-weight: 500;
-}
-
-.translation {
-  color: #666;
-  font-size: 0.8rem;
-}
-
-.category {
-  color: #888;
-  font-size: 0.75rem;
-  margin-left: auto;
+  overflow-wrap: anywhere;
 }
 
 .empty-placeholder {
   color: #bbb;
+  font-style: italic;
+  font-weight: 400;
 }

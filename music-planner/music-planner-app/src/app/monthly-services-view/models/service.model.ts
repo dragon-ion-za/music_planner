@@ -1,7 +1,8 @@
 export interface Song {
   number: string;
   hymnal: string;
-  translationOf?: { number: string };
+  name: string | null;
+  translationOf?: { number: string; name: string | null; hymnal: string };
 }
 
 export interface SlotTemplate {
@@ -41,6 +42,8 @@ export type ConflictMap = Record<string, SlotConflictStatus>;
 
 export interface ServiceSlotViewModel extends ServiceSlot {
   canonicalNumber: string;
+  slotLabel: string;
+  hymnDisplayText: string | null;
 }
 
 export interface SlotGroup {

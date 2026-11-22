@@ -172,6 +172,107 @@ Implement the Monthly Services View as a standalone Angular 17 component at `/mo
 - [x] 14. Final checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
+- [x] 15. Backend: persist hymn names (`music-planner-api`)
+  - [x] 15.1 Add `name` to the Song model
+    - In `src/models/Song.ts` add `declare name: string | null;` and `name: { type: DataTypes.STRING(255), allowNull: true }`
+    - _Requirements: 10.6, 10.11_
+
+  - [x] 15.2 Update `seedSongsFromCsv.ts` (exports, includeName option, explicit fields)
+    - Export `resolveCsvPath` and `parseCsv`
+    - Add `seedSongsFromCsv(options?: { includeName?: boolean })`, default `true`
+    - When `true`, `Song.upsert` stores `name: row.name.trim() || null`
+    - When `false`, omit `name` and pass `fields: ['number', 'hymnal', 'signature', 'tempo', 'familiarity', 'translationOfId']`
+    - Pass 2 lookups use `Song.findOne({ where, attributes: ['id', 'number'] })` so SQL never selects `name`
+    - _Requirements: 10.7, 10.8_
+
+  - [x] 15.3 Update migration 006 to seed without `name`
+    - In `src/db/migrations/006-load-song-repertoire.ts` call `seedSongsFromCsv({ includeName: false })`; leave `down` unchanged
+    - _Requirements: 10.8_
+
+  - [x] 15.4 Create migration `008-add-song-name.ts`
+    - Create `src/db/migrations/008-add-song-name.ts`
+    - `up`: if `describeTable('songs')` has no `name`, `addColumn` a nullable `STRING(255)`; then call `backfillSongNames(qi, parseCsv(resolveCsvPath()))`
+    - Export `backfillSongNames(qi, rows)`: read existing song numbers (upper-cased) with a raw `SELECT`, `console.warn` and skip CSV rows with no matching song, skip blank names, and run `UPDATE songs SET name = :name WHERE UPPER(number) = :number AND name IS NULL` with trimmed names sliced to 255 chars
+    - `down`: `removeColumn('songs', 'name')`
+    - Use only raw `queryInterface` and SQL that works on both Postgres and SQLite
+    - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.8_
+
+  - [x] 15.5 Return `name` from `ServiceRepository`
+    - In `src/repositories/ServiceRepository.ts` `SERVICE_INCLUDE`, set song attributes to `['number', 'hymnal', 'name', 'familiarity']` and `translationOf` attributes to `['number', 'hymnal', 'name']`
+    - _Requirements: 10.9, 10.10, 10.11_
+
+  - [x] 15.6 Write unit tests for migration 008 and repository
+    - Migration 008 `up` adds a nullable `name` column and backfills trimmed names case-insensitively; `down` removes the column (SQLite test DB)
+    - Unmatched CSV rows are warned about and skipped; a second `up` run does not error
+    - Full migration sequence 001–008 succeeds on a fresh SQLite DB with a small CSV while `Song` declares `name`
+    - `ServiceRepository` returns `name: null` for a song and a translation with no stored name
+    - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.8, 10.11_
+
+  - [x]* 15.7 Write property test for hymn name round trip
+    - **Property 14: Hymn name round trip through the API**
+    - **Validates: Requirements 10.2, 10.3, 10.7, 10.9, 10.10, 10.11, 10.12**
+    - Jest with `fast-check`: generate songs (mixed-case numbers, blank or padded names, optional translation links) and CSV rows including unmatched ones; load without `name`, run `backfillSongNames`, read via `ServiceRepository`, and assert `song.name` and `song.translationOf.name` equal the trimmed CSV name or `null`
+    - Also assert `seedSongsFromCsv` with names enabled stores the same names
+    - Tag: `// Feature: monthly-services-view, Property 14: Hymn name round trip through the API`
+
+  - [x]* 15.8 Write property test for backfill idempotence
+    - **Property 15: Name backfill is idempotent**
+    - **Validates: Requirements 10.4**
+    - Jest with `fast-check`: run `backfillSongNames` twice on generated songs and CSV rows; assert every `songs.name` is unchanged after the second run
+    - Tag: `// Feature: monthly-services-view, Property 15: Name backfill is idempotent`
+
+- [x] 16. Checkpoint — Ensure backend tests pass
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [x] 17. Frontend: models and slot label helpers (`music-planner-app`)
+  - [x] 17.1 Update the `Song` model
+    - In `models/service.model.ts` add `name: string | null` to `Song`
+    - Change `translationOf` to `{ number: string; name: string | null; hymnal: string }`
+    - Extend `ServiceSlotViewModel` with `slotLabel: string` and `hymnDisplayText: string | null`
+    - Update existing specs and fixtures that build `Song` objects so they compile
+    - _Requirements: 6.1, 6.2, 6.3, 10.13_
+
+  - [x] 17.2 Create `models/slot-labels.ts`
+    - Export `SLOT_LABEL_TABLE` (orchestra1–5 → '1'–'5', choir1–4 → '1'–'4', congregationBS → 'Before Service', congregationOH → 'Opening Hymn', congregationRP → 'Repentance', congregationCM1 → 'Communion 1', congregationCM2 → 'Communion 2')
+    - Export `getSlotLabel(slotKey)` using `Object.prototype.hasOwnProperty.call`, falling back to the raw `slotKey`
+    - Export `formatHymnDisplayText(song)` returning `<number> [<name>] [(<translationOf.number>)]`, omitting a null or blank name and omitting brackets when there is no translation
+    - _Requirements: 6.1, 6.2, 6.3, 6.5, 6.6_
+
+  - [x]* 17.3 Write property test for hymn display text
+    - **Property 12: Hymn display text formatting**
+    - **Validates: Requirements 6.1, 6.2, 6.6**
+    - Use `fc.record` with number, name (`fc.option` of string, including blank) and optional translation number; assert the result starts with the number, contains the name only when non-blank, and has brackets if and only if a translation exists
+    - Tag: `// Feature: monthly-services-view, Property 12: Hymn display text formatting`
+
+  - [x]* 17.4 Write property test for slot label mapping
+    - **Property 13: Slot label mapping with fallback**
+    - **Validates: Requirements 6.3, 6.5**
+    - Assert each of the 14 listed keys returns its table value; for arbitrary strings (including `constructor`, `toString` and `''`) not in the table assert the raw key is returned
+    - Tag: `// Feature: monthly-services-view, Property 13: Slot label mapping with fallback`
+
+- [x] 18. Frontend: populate and render labels
+  - [x] 18.1 Populate `slotLabel` and `hymnDisplayText` in view models
+    - In `MonthlyServicesViewComponent`, set `slotLabel = getSlotLabel(slot.slotTemplate.slotKey)` and `hymnDisplayText = slot.song ? formatHymnDisplayText(slot.song) : null` wherever `ServiceSlotViewModel` objects are built
+    - Do the same in the swap success path and the optimistic swap and revert paths, so slots show the correct text after a swap
+    - _Requirements: 6.1, 6.2, 6.3, 6.6_
+
+  - [x] 18.2 Update `SlotItemComponent` template and CSS
+    - Show `slot.slotLabel` in `.slot-label` and `slot.hymnDisplayText` in `.slot-song`; show the `Empty` placeholder when `hymnDisplayText` is null
+    - Remove `slotTemplate.category` and the raw `slotKey` from the slot entry; leave the `.category-label` heading in `ServiceCardComponent` unchanged
+    - Keep conflict classes, tooltip and `cdkDrag` behaviour
+    - Update `slot-item.component.css` for the label and song layout
+    - _Requirements: 5.5, 6.1, 6.2, 6.3, 6.4_
+
+  - [x] 18.3 Write unit tests for slot item rendering
+    - Occupied slot shows the label and text (e.g. `Opening Hymn`, `A10 Grote God (E7)`)
+    - Null name and no translation render only the number
+    - Empty slot shows the placeholder
+    - The slot item does not render the category or raw slotKey; the service card still renders the category heading
+    - _Requirements: 5.5, 6.1, 6.2, 6.3, 6.4, 6.6_
+
+- [x] 19. Final checkpoint — Ensure all tests pass
+  - Ensure all tests pass, ask the user if questions arise.
+
 ## Notes
 
 - Tasks marked with `*` are optional and can be skipped for faster MVP
@@ -180,3 +281,17 @@ Implement the Monthly Services View as a standalone Angular 17 component at `/mo
 - The conflict detection algorithm mirrors `schedule.component.ts` `calculateConflicts` — same thresholds (≤56/57–90/91–365 days), same canonical number resolution via `translationOf`
 - `@auth0/auth0-angular` and `fast-check` must be installed before starting implementation (Task 1)
 - All components are standalone — import Angular Material, CDK, and other dependencies directly in each component's `imports` array
+
+## Task Dependency Graph
+
+```json
+{
+  "waves": [
+    { "id": 0, "tasks": ["15.1", "15.2", "17.1"] },
+    { "id": 1, "tasks": ["15.3", "15.4", "17.2"] },
+    { "id": 2, "tasks": ["15.5", "17.3", "17.4", "18.1"] },
+    { "id": 3, "tasks": ["15.6", "15.7", "15.8", "18.2"] },
+    { "id": 4, "tasks": ["18.3"] }
+  ]
+}
+```

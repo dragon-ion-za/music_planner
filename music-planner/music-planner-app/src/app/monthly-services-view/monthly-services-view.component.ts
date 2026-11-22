@@ -19,8 +19,9 @@ import { MonthNavigatorComponent } from './components/month-navigator/month-navi
 import { ServiceCardComponent } from './components/service-card/service-card.component';
 import { AddServiceDialogComponent } from './components/add-service-dialog/add-service-dialog.component';
 import {
-  Service, ServiceViewModel, ServiceSlotViewModel, SlotGroup, ConflictMap
+  Service, ServiceViewModel, ServiceSlotViewModel, SlotGroup, ConflictMap, Song
 } from './models/service.model';
+import { getSlotLabel, formatHymnDisplayText } from './models/slot-labels';
 
 @Component({
   selector: 'app-monthly-services-view',
@@ -195,8 +196,10 @@ export class MonthlyServicesViewComponent implements OnInit {
     // Optimistic swap
     const origSourceSongId = sourceSlot.songId;
     const origTargetSongId = targetSlot.songId;
-    sourceSlot.songId = origTargetSongId;
-    targetSlot.songId = origSourceSongId;
+    const origSourceSong = sourceSlot.song;
+    const origTargetSong = targetSlot.song;
+    this.applySong(sourceSlot, origTargetSongId, origTargetSong);
+    this.applySong(targetSlot, origSourceSongId, origSourceSong);
 
     this.swapping = true;
 
@@ -216,8 +219,8 @@ export class MonthlyServicesViewComponent implements OnInit {
       },
       error: () => {
         // Revert optimistic swap
-        sourceSlot.songId = origSourceSongId;
-        targetSlot.songId = origTargetSongId;
+        this.applySong(sourceSlot, origSourceSongId, origSourceSong);
+        this.applySong(targetSlot, origTargetSongId, origTargetSong);
         this.swapping = false;
         this.snackBar.open('Failed to swap songs. Please try again.', 'Dismiss', { duration: 4000 });
       }
@@ -240,10 +243,21 @@ export class MonthlyServicesViewComponent implements OnInit {
     return undefined;
   }
 
+  /** Sets a slot's song and recomputes every field derived from it. */
+  private applySong(slot: ServiceSlotViewModel, songId: string | null, song: Song | null): void {
+    slot.songId = songId;
+    slot.song = song;
+    slot.canonicalNumber = song?.translationOf?.number ?? song?.number ?? '';
+    slot.slotLabel = getSlotLabel(slot.slotTemplate.slotKey);
+    slot.hymnDisplayText = song ? formatHymnDisplayText(song) : null;
+  }
+
   private toViewModel(svc: Service): ServiceViewModel {
     const slotViewModels: ServiceSlotViewModel[] = (svc.serviceSlots ?? []).map(slot => ({
       ...slot,
-      canonicalNumber: slot.song?.translationOf?.number ?? slot.song?.number ?? ''
+      canonicalNumber: slot.song?.translationOf?.number ?? slot.song?.number ?? '',
+      slotLabel: getSlotLabel(slot.slotTemplate.slotKey),
+      hymnDisplayText: slot.song ? formatHymnDisplayText(slot.song) : null
     }));
 
     const categoryOrder: Record<string, number> = { orchestra: 0, choir: 1, congregation: 2 };

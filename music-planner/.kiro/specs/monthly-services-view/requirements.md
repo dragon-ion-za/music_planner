@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document defines the requirements for the Monthly Services View — a new page in the Angular 17 music planner application that displays worship services grouped by month. The page fetches service data from the existing REST API using Auth0 JWT authentication, presents services in a two-column alternating layout with songs grouped by slot category (orchestra, choir, congregation), detects and highlights song conflicts, and supports drag-and-drop swapping of songs between services.
+This document defines the requirements for the Monthly Services View — a new page in the Angular 17 music planner application that displays worship services grouped by month. The page fetches service data from the existing REST API using Auth0 JWT authentication, presents services in a two-column alternating layout with songs grouped by slot category (orchestra, choir, congregation), detects and highlights song conflicts, and supports drag-and-drop swapping of songs between services. Each slot shows a human-readable slot label and the song number together with the hymn name. Because the API does not yet store hymn names, this document also covers persisting the hymn name (new migration, backfill from the repertoire CSV, seed update) and returning it from `GET /api/services`.
 
 ## Glossary
 
@@ -10,7 +10,13 @@ This document defines the requirements for the Monthly Services View — a new p
 - **Service**: A scheduled worship event with a date, service type, and a set of song slots, as returned by `GET /api/services`.
 - **ServiceSlot**: A single song assignment within a service, containing a slot template (slotKey, category, displayOrder) and an optional song.
 - **SlotTemplate**: Metadata for a service slot — includes `slotKey`, `category` (orchestra, choir, congregation), and `displayOrder`.
-- **Song**: A hymn assigned to a slot, identified by `number` and `hymnal`; may have a `translationOf` reference pointing to the canonical song number.
+- **Song**: A hymn assigned to a slot, identified by `number` and `hymnal`, with a `name` (the hymn title, e.g. "Grote God"); may have a `translationOf` reference pointing to the canonical song, which also carries `number` and `name`.
+- **Slot_Label**: The human-readable label displayed for a slot, derived from `slotTemplate.slotKey` using the Slot_Label_Table.
+- **Slot_Label_Table**: The mapping from `slotKey` to Slot_Label defined in Requirement 6. all congregation labels (`congregationBS`, `congregationOH`, `congregationRP`, `congregationCM1`, `congregationCM2`) are confirmed.
+- **Hymn_Display_Text**: The text shown for an occupied slot's song: the song `number`, then the song `name`, then, when a translation exists, the translation `number` in brackets directly after the name (e.g. "A10 Grote God (E7)").
+- **Repertoire_CSV**: The pipe-delimited file `.data/repertoir.csv` (copy bundled at `music-planner-api/assets/repertoir.csv`) with columns `Hymnal|Number|Name|TranslationNumber_HymnalE`.
+- **Songs_API**: The `music-planner-api` backend, including the `Song` model, database migrations, the Repertoire_CSV seed (`seedSongsFromCsv.ts`) and `ServiceRepository`.
+- **Name_Migration**: The new database migration that adds the `name` column to the `songs` table and backfills it from the Repertoire_CSV.
 - **Conflict**: A song used in two services within 56 days of each other (displayed in red).
 - **Quarter_Conflict**: A song used in two services between 57 and 90 days apart (displayed in yellow).
 - **Year_Conflict**: A song used in two services between 91 and 365 days apart (displayed in green).
@@ -94,18 +100,32 @@ This document defines the requirements for the Monthly Services View — a new p
 
 ### Requirement 6: Song Slot Display
 
-**User Story:** As a music planner, I want each song slot to show the song number, translation, category, and conflict status, so that I can quickly assess the programme quality.
+**User Story:** As a music planner, I want each song slot to show a friendly slot name, the song number, the hymn name, any translation, and conflict status, so that I can quickly assess the programme quality.
+
+#### Slot_Label_Table
+
+| slotKey | Slot_Label | Status |
+|---|---|---|
+| `orchestra1` – `orchestra5` | "1" – "5" | Numbered within the Orchestra category heading |
+| `choir1` – `choir4` | "1" – "4" | Numbered within the Choir category heading |
+| `congregationBS` | "Before Service" | Confirmed |
+| `congregationOH` | "Opening Hymn" | Confirmed |
+| `congregationRP` | "Repentance" | Confirmed |
+| `congregationCM1` | "Communion 1" | Confirmed |
+| `congregationCM2` | "Communion 2" | Confirmed |
 
 #### Acceptance Criteria
 
-1. THE Monthly_Services_View SHALL display the song `number` for each occupied slot.
-2. WHEN the slot's song has a `translationOf` reference, THE Monthly_Services_View SHALL display the translated song number alongside the original number.
-3. THE Monthly_Services_View SHALL display the `slotTemplate.category` label for each slot (e.g. "orchestra", "choir", "congregation").
-4. THE Monthly_Services_View SHALL display the `slotTemplate.slotKey` to identify the specific slot position within its category.
-5. WHEN a song has one or more Conflict entries (within 56 days), THE Monthly_Services_View SHALL apply a red visual indicator to that slot.
-6. WHEN a song has Quarter_Conflict entries (57–90 days) but no Conflict entries, THE Monthly_Services_View SHALL apply a yellow visual indicator to that slot.
-7. WHEN a song has Year_Conflict entries (91–365 days) but no Conflict or Quarter_Conflict entries, THE Monthly_Services_View SHALL apply a green visual indicator to that slot.
-8. WHEN a slot has conflict indicators, THE Monthly_Services_View SHALL display a tooltip listing the conflicting service dates and service types on hover.
+1. THE Monthly_Services_View SHALL display the Hymn_Display_Text for each occupied slot, consisting of the song `number` followed by the song `name`.
+2. WHEN the slot's song has a `translationOf` reference, THE Monthly_Services_View SHALL append the `translationOf.number` in brackets directly after the song `name` (e.g. "A10 Grote God (E7)").
+3. THE Monthly_Services_View SHALL display the Slot_Label from the Slot_Label_Table for each slot instead of the raw `slotTemplate.slotKey`.
+4. THE Monthly_Services_View SHALL display each slot entry without the `slotTemplate.category` label; the category group heading within the service card SHALL remain.
+5. IF a `slotKey` is not listed in the Slot_Label_Table, THEN THE Monthly_Services_View SHALL display the raw `slotKey` as the Slot_Label.
+6. IF an occupied slot's song has no `name` value, THEN THE Monthly_Services_View SHALL display the song `number` without a name.
+7. WHEN a song has one or more Conflict entries (within 56 days), THE Monthly_Services_View SHALL apply a red visual indicator to that slot.
+8. WHEN a song has Quarter_Conflict entries (57–90 days) but no Conflict entries, THE Monthly_Services_View SHALL apply a yellow visual indicator to that slot.
+9. WHEN a song has Year_Conflict entries (91–365 days) but no Conflict or Quarter_Conflict entries, THE Monthly_Services_View SHALL apply a green visual indicator to that slot.
+10. WHEN a slot has conflict indicators, THE Monthly_Services_View SHALL display a tooltip listing the conflicting service dates and service types on hover.
 
 ---
 
@@ -150,3 +170,25 @@ This document defines the requirements for the Monthly Services View — a new p
 1. THE Monthly_Services_View SHALL use the Auth0_Service to obtain a valid access token before making any API call.
 2. WHEN the user is not authenticated, THE Monthly_Services_View SHALL display a prompt to log in rather than attempting to call the API.
 3. WHEN the access token expires during a session, THE Monthly_Services_View SHALL obtain a refreshed token before retrying the failed request.
+
+---
+
+### Requirement 10: Persist and Serve Hymn Names
+
+**User Story:** As a music planner, I want hymn names stored in the database and returned by the API, so that the monthly view can show the hymn name next to the song number.
+
+#### Acceptance Criteria
+
+1. THE Name_Migration SHALL add a nullable `name` column of type string (maximum 255 characters) to the `songs` table.
+2. WHEN the Name_Migration runs, THE Name_Migration SHALL set `songs.name` for each existing song from the `Name` column of the Repertoire_CSV row whose `Number` matches the song `number` (case-insensitive).
+3. IF a Repertoire_CSV row has no matching song in the `songs` table, THEN THE Name_Migration SHALL log a warning identifying the unmatched `Number` and continue.
+4. WHEN the Name_Migration is run a second time against already backfilled data, THE Name_Migration SHALL leave all `songs.name` values unchanged (idempotent backfill).
+5. THE Name_Migration SHALL provide a `down` step that removes the `name` column.
+6. THE Songs_API `Song` model SHALL declare a nullable `name` attribute mapped to the `songs.name` column.
+7. WHEN `seedSongsFromCsv` upserts a song, THE Songs_API SHALL store the Repertoire_CSV `Name` value (trimmed) in `songs.name`.
+8. WHEN the Name_Migration is applied in sequence after migrations 001 to 007 on a fresh database, THE Songs_API SHALL complete all migrations successfully, including migration 006 which loads the repertoire before the `name` column exists.
+9. WHEN `GET /api/services` returns a service slot with a song, THE Songs_API SHALL include `name` in the `song` object alongside `number`, `hymnal` and `familiarity`.
+10. WHEN the returned `song` has a `translationOf` reference, THE Songs_API SHALL include `name` in the `translationOf` object alongside `number` and `hymnal`.
+11. IF a song has no stored name, THEN THE Songs_API SHALL return `name` as `null` for that song.
+12. FOR ALL songs in the Repertoire_CSV, backfilling the names and then reading the song through `GET /api/services` SHALL return the same `name` as the Repertoire_CSV row (round-trip property).
+13. THE Monthly_Services_View `Song` model SHALL declare `name` (string or null) on both `song` and `song.translationOf`.
