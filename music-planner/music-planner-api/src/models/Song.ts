@@ -5,6 +5,7 @@ export class Song extends Model {
   declare id: string;
   declare number: string;
   declare hymnal: string;
+  declare name: string | null;
   declare translationOfId: string | null;
   declare signature: string | null;
   declare tempo: string | null;
@@ -16,6 +17,7 @@ Song.init(
     id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
     number: { type: DataTypes.STRING(20), allowNull: false, unique: true },
     hymnal: { type: DataTypes.STRING(10), allowNull: false },
+    name: { type: DataTypes.STRING(255), allowNull: true },
     translationOfId: { type: DataTypes.UUID, allowNull: true },
     signature: { type: DataTypes.STRING(100), allowNull: true },
     tempo: { type: DataTypes.STRING(50), allowNull: true },

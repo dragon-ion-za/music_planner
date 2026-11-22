@@ -14,7 +14,9 @@ import { Song } from '../../models/Song';
  * against the rows loaded here.
  */
 export async function up(_ctx: { context: QueryInterface }): Promise<void> {
-  await seedSongsFromCsv();
+  // `name` is omitted: the column does not exist yet at this point; it is added
+  // by migration 008.
+  await seedSongsFromCsv({ includeName: false });
 }
 
 export async function down(_ctx: { context: QueryInterface }): Promise<void> {

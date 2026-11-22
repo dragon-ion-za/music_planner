@@ -1,3 +1,4 @@
+import { Transaction } from 'sequelize';
 import { initAssociations } from '../models/associations';
 import { SlotTemplate } from '../models/SlotTemplate';
 
@@ -26,7 +27,10 @@ const DEFAULT_SLOTS: SlotDefinition[] = [
 
 const SERVICE_TYPE = 'Sunday Service';
 
-export async function seedSlotTemplates(congregationId: string): Promise<void> {
+export async function seedSlotTemplates(
+  congregationId: string,
+  options: { transaction?: Transaction } = {},
+): Promise<void> {
   initAssociations();
 
   for (const slot of DEFAULT_SLOTS) {
@@ -36,7 +40,7 @@ export async function seedSlotTemplates(congregationId: string): Promise<void> {
       slotKey: slot.slotKey,
       displayOrder: slot.displayOrder,
       category: slot.category,
-    });
+    }, { transaction: options.transaction });
   }
 
   console.log(`Seeded ${DEFAULT_SLOTS.length} slot templates for congregation ${congregationId}.`);

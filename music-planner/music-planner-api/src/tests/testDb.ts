@@ -12,6 +12,12 @@ export const testSequelize = new Sequelize({
   logging: false,
 });
 
+/** Binds the model classes to the in-memory SQLite instance without creating tables. */
+export function bindTestModels(): void {
+  reinitModels();
+  initAssociations();
+}
+
 function reinitModels(): void {
   Congregation.init(
     {
@@ -45,6 +51,7 @@ function reinitModels(): void {
       id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
       number: { type: DataTypes.STRING(20), allowNull: false, unique: true },
       hymnal: { type: DataTypes.STRING(10), allowNull: false },
+      name: { type: DataTypes.STRING(255), allowNull: true },
       translationOfId: { type: DataTypes.UUID, allowNull: true },
       signature: { type: DataTypes.STRING(100), allowNull: true },
       tempo: { type: DataTypes.STRING(50), allowNull: true },

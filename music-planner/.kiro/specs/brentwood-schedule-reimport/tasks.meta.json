@@ -1,0 +1,256 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Add an optional `transaction` parameter to `seedSlotTemplates`": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327314758
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327321158
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327361897
+      }
+    ],
+    "1.2 Create `src/db/importers/brentwoodSchedule.ts`": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327314908
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327364731
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327408693
+      }
+    ],
+    "2.1 Rewrite `007-import-brentwood-schedule.ts`": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315047
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327412012
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327452515
+      }
+    ],
+    "3.1 Create `src/db/migrations/009-reimport-brentwood-schedule.ts`": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315175
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327412534
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327453115
+      }
+    ],
+    "4. Checkpoint - Ensure the implementation compiles and existing tests pass": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315293
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795338620247
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339471313
+      }
+    ],
+    "5.1 Write unit tests for the import helper": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315419
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327461768
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795338551230
+      }
+    ],
+    "6.1 Write migration 009 `up` tests": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315524
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327461856
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795338551712
+      }
+    ],
+    "6.2 Write migration 007 and 009 `down` tests": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315628
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795338559297
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795338596438
+      }
+    ],
+    "6.3 Write the migration sequence test": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315728
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339484601
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339538682
+      }
+    ],
+    "6.4 Write the transaction-wiring test": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315830
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339539382
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339574191
+      }
+    ],
+    "6.5 Write the pre-flight failure tests": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327315915
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339577304
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339629757
+      }
+    ],
+    "7. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327316028
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339630345
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795345686012
+      }
+    ],
+    "1. Extract the import helper": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327408847
+      }
+    ],
+    "2. Refactor migration 007 to use the helper": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327452654
+      }
+    ],
+    "3. Create migration 009": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795327453302
+      }
+    ],
+    "5. Helper tests": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795338551379
+      }
+    ],
+    "5.2 Write property test for song number resolution": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795338609032
+      },
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795345686595
+      }
+    ],
+    "6. Migration tests": [
+      {
+        "executionId": "4febff43-04f9-4813-8520-89168977a258",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795339629870
+      }
+    ]
+  }
+}

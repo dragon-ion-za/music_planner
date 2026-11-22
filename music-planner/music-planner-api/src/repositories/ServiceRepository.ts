@@ -28,12 +28,12 @@ const SERVICE_INCLUDE = [
       {
         model: Song,
         as: 'song',
-        attributes: ['number', 'hymnal', 'familiarity'],
+        attributes: ['number', 'hymnal', 'name', 'familiarity'],
         include: [
           {
             model: Song,
             as: 'translationOf',
-            attributes: ['number', 'hymnal'],
+            attributes: ['number', 'hymnal', 'name'],
           },
         ],
       },

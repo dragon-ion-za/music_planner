@@ -1,9 +1,9 @@
-﻿import * as fs from 'fs';
+import * as fs from 'fs';
 import * as path from 'path';
 import { initAssociations } from '../models/associations';
 import { Song } from '../models/Song';
 
-interface CsvRow {
+export interface CsvRow {
   hymnal: string;
   number: string;
   name: string;
@@ -15,7 +15,7 @@ interface CsvRow {
  * into the API image under assets/, and falls back to the repo-root .data copy
  * for local development.
  */
-function resolveCsvPath(): string {
+export function resolveCsvPath(): string {
   const candidates = [
     path.resolve(__dirname, '../../assets/repertoir.csv'),
     path.resolve(__dirname, '../../../.data/repertoir.csv'),
@@ -29,7 +29,7 @@ function resolveCsvPath(): string {
   throw new Error(`repertoir.csv not found. Looked in:\n  ${candidates.join('\n  ')}`);
 }
 
-function parseCsv(filePath: string): CsvRow[] {
+export function parseCsv(filePath: string): CsvRow[] {
   const raw = fs.readFileSync(filePath, 'utf-8');
   const lines = raw.split(/\r?\n/).filter((line) => line.trim() !== '');
 
@@ -48,7 +48,8 @@ function parseCsv(filePath: string): CsvRow[] {
   });
 }
 
-export async function seedSongsFromCsv(): Promise<void> {
+export async function seedSongsFromCsv(options: { includeName?: boolean } = {}): Promise<void> {
+  const includeName = options.includeName ?? true;
   initAssociations();
 
   const filePath = resolveCsvPath();
@@ -63,14 +64,23 @@ export async function seedSongsFromCsv(): Promise<void> {
     const number = row.number.toUpperCase();
     const hymnal = number.match(/^[A-Z]+/)?.[0] ?? '';
 
-    await Song.upsert({
+    const values = {
       number,
       hymnal,
       signature: null,
       tempo: null,
       familiarity: 0,
       translationOfId: null,
-    });
+    };
+
+    if (includeName) {
+      await Song.upsert({ ...values, name: row.name.trim() || null });
+    } else {
+      // Omit name so the SQL never references a column that may not exist yet (migration 006).
+      await Song.upsert(values, {
+        fields: ['number', 'hymnal', 'signature', 'tempo', 'familiarity', 'translationOfId'],
+      });
+    }
     insertedCount++;
   }
 
@@ -84,8 +94,8 @@ export async function seedSongsFromCsv(): Promise<void> {
     const sourceNumber = row.number.toUpperCase();
     const targetNumber = row.translationNumber.toUpperCase();
 
-    const source = await Song.findOne({ where: { number: sourceNumber } });
-    const target = await Song.findOne({ where: { number: targetNumber } });
+    const source = await Song.findOne({ where: { number: sourceNumber }, attributes: ['id', 'number'] });
+    const target = await Song.findOne({ where: { number: targetNumber }, attributes: ['id', 'number'] });
 
     if (source && target) {
       await source.update({ translationOfId: target.id });
