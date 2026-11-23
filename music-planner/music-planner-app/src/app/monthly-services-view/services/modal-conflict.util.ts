@@ -2,6 +2,7 @@ import moment from 'moment';
 import { Service } from '../models/service.model';
 import { RepertoireEntry } from '../models/repertoire.model';
 import { SlotConflictStatus } from '../models/service.model';
+import { resolveSongNumber } from './service-form.util';
 
 export interface DraftSlot {
   slotKey: string;
@@ -9,6 +10,36 @@ export interface DraftSlot {
 }
 
 export type ModalConflictMap = Record<string, SlotConflictStatus>;
+
+export type SlotHighlight = 'red' | 'yellow' | 'green' | 'free';
+
+/** Draft slots for buildModalConflictMap: known songs only, canonical numbers. */
+export function buildDraftSlots(
+  slots: { slotKey: string; songNumber: string }[],
+  lookup: Map<string, string>
+): DraftSlot[] {
+  const result: DraftSlot[] = [];
+  for (const slot of slots) {
+    const canonical = resolveSongNumber(slot.songNumber, lookup);
+    if (canonical !== null) {
+      result.push({ slotKey: slot.slotKey, songNumber: canonical });
+    }
+  }
+  return result;
+}
+
+/**
+ * null   -> no highlight (no known song, or no conflict status computed)
+ * 'free' -> known song, status computed, severity null
+ * else   -> the severity
+ */
+export function getSlotHighlight(
+  hasKnownSong: boolean,
+  status: SlotConflictStatus | null
+): SlotHighlight | null {
+  if (!hasKnownSong || status === null) return null;
+  return status.severity ?? 'free';
+}
 
 export function buildModalConflictMap(
   windowServices: Service[],

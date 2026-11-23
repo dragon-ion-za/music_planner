@@ -7,14 +7,14 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
 ## Tasks
 
 - [ ] 1. Add pure helpers for case-insensitive songs and highlight mapping
-  - [-] 1.1 Add song resolution and canonical payload building in `services/service-form.util.ts`
+  - [x] 1.1 Add song resolution and canonical payload building in `services/service-form.util.ts`
     - Add `buildSongLookup(entries)` returning a lowercase-to-canonical `Map`
     - Add `resolveSongNumber(value, lookup)` that trims, ignores letter case, and returns the canonical number or null (null for blank, `N/A` in any case, and unknown text)
     - Add an optional `songLookup` parameter to `buildServicePayload`; known songs send the canonical number, blank and `N/A` send null, unknown text passes through trimmed, and the result keeps exactly 14 entries in `SLOT_TEMPLATES` order
     - Keep `normalizeSongInput` and existing callers working
     - _Requirements: 5.1, 5.2, 5.6, 7.1, 7.2, 7.3_
 
-  - [~] 1.2 Add `SlotHighlight`, `buildDraftSlots` and `getSlotHighlight` in `services/modal-conflict.util.ts`
+  - [-] 1.2 Add `SlotHighlight`, `buildDraftSlots` and `getSlotHighlight` in `services/modal-conflict.util.ts`
     - `buildDraftSlots(slots, lookup)` returns `DraftSlot[]` for known songs only, using canonical numbers
     - `getSlotHighlight(hasKnownSong, status)` returns null when there is no known song or no status, the severity when it is non-null, and `'free'` when the status exists with null severity
     - Do not change `buildModalConflictMap`
