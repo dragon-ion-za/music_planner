@@ -54,7 +54,7 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
     - Pass `songLookup` to `buildServicePayload` in `onSave`; remove the unused `hasSong`
     - _Requirements: 2.4, 2.5, 3.1, 3.2, 4.1, 4.2, 4.3, 4.4, 5.4, 5.5, 6.1, 7.1, 7.4_
 
-  - [~] 3.2 Update the template and styles
+  - [x] 3.2 Update the template and styles
     - In `add-service-dialog.component.html`: delete the `.conflict-badge` span; bind `[ngClass]` (`highlight-<kind>`), `matTooltip`, `matTooltipDisabled` and `matTooltipClass="conflict-tooltip"` on the slot `mat-form-field`; add `(blur)="onSongBlur(slot)"` to the input; keep `ngModel`
     - In `add-service-dialog.component.css`: remove `.conflict-badge` and `.conflict-red/yellow/green`; add `.slot-field.highlight-red|yellow|green|free ::ng-deep .mat-mdc-text-field-wrapper` background rules using the service card tints (red `rgba(244,67,54,.15)`, yellow `rgba(255,193,7,.15)`, green `rgba(76,175,80,.15)`) and light blue `rgba(79,195,247,.25)`
     - In `src/styles.css` (app root): add `.conflict-tooltip { white-space: pre-line; }`

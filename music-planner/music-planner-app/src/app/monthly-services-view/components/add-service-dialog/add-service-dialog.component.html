@@ -35,13 +35,19 @@
       <h3 class="category-header">{{ group.category | titlecase }}</h3>
       <div class="slot-grid">
         <div *ngFor="let slot of group.slots; trackBy: trackBySlotKey" class="slot-wrapper">
-          <mat-form-field appearance="outline" class="slot-field">
+          <mat-form-field appearance="outline" class="slot-field"
+                          [ngClass]="getHighlight(slot) ? 'highlight-' + getHighlight(slot) : ''"
+                          [matTooltip]="getConflictTooltip(slot)"
+                          [matTooltipDisabled]="!getConflictTooltip(slot)"
+                          matTooltipClass="conflict-tooltip"
+                          matTooltipPosition="above">
             <mat-label>{{ slot.slotKey }}</mat-label>
             <input matInput
                    [(ngModel)]="slot.songNumber"
                    [name]="slot.slotKey"
                    [matAutocomplete]="auto"
                    (ngModelChange)="filterOptions(slot)"
+                   (blur)="onSongBlur(slot)"
                    placeholder="Song number">
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let option of slot.filteredOptions" [value]="option.number">
@@ -52,17 +58,6 @@
               Unknown song number.
             </mat-error>
           </mat-form-field>
-          <!-- Conflict badge rendered after the field -->
-          <span
-            *ngIf="slot.conflictStatus && slot.conflictStatus.severity && hasSong(slot)"
-            class="conflict-badge"
-            [class.conflict-red]="slot.conflictStatus.severity === 'red'"
-            [class.conflict-yellow]="slot.conflictStatus.severity === 'yellow'"
-            [class.conflict-green]="slot.conflictStatus.severity === 'green'"
-            [matTooltip]="getConflictTooltip(slot)"
-            matTooltipPosition="above">
-            ●
-          </span>
         </div>
       </div>
     </ng-container>

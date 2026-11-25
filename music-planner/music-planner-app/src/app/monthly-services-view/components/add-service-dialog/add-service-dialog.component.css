@@ -31,15 +31,10 @@
   flex-direction: column;
 }
 
-.conflict-badge {
-  font-size: 10px;
-  margin-top: 2px;
-  cursor: default;
-}
-
-.conflict-red    { color: #f44336; }
-.conflict-yellow { color: #ff9800; }
-.conflict-green  { color: #4caf50; }
+.slot-field.highlight-red ::ng-deep .mat-mdc-text-field-wrapper    { background-color: rgba(244, 67, 54, 0.15); }
+.slot-field.highlight-yellow ::ng-deep .mat-mdc-text-field-wrapper { background-color: rgba(255, 193, 7, 0.15); }
+.slot-field.highlight-green ::ng-deep .mat-mdc-text-field-wrapper  { background-color: rgba(76, 175, 80, 0.15); }
+.slot-field.highlight-free ::ng-deep .mat-mdc-text-field-wrapper   { background-color: rgba(79, 195, 247, 0.25); }
 
 .submit-error {
   color: #f44336;

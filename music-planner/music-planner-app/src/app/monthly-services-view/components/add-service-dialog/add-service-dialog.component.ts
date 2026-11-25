@@ -121,11 +121,6 @@ export class AddServiceDialogComponent implements OnInit {
     return this.editingService !== null;
   }
 
-  // TODO(task 3.2): remove hasSong once the template no longer renders the conflict badge.
-  hasSong(slot: SlotState): boolean {
-    return normalizeSongInput(slot.songNumber) !== null;
-  }
-
   /** True when the slot holds a non-empty, non-N/A value that is not in the repertoire. */
   isUnknownSong(slot: SlotState): boolean {
     const value = normalizeSongInput(slot.songNumber);
