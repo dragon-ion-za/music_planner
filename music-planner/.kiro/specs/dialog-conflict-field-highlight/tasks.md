@@ -36,12 +36,12 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
     - **Property 5: Highlight mapping is total and follows the severity**
     - **Validates: Requirements 1.1, 1.2, 1.3, 2.1, 2.2, 2.3**
 
-  - [-]* 1.6 Write property test for case-invariant conflicts in `services/modal-conflict.util.spec.ts`
+  - [x]* 1.6 Write property test for case-invariant conflicts in `services/modal-conflict.util.spec.ts`
     - **Property 6: Conflict results do not depend on input letter case**
     - Compare `buildModalConflictMap` results for case-varied inputs (through `buildDraftSlots`) and canonical inputs over generated window services
     - **Validates: Requirements 6.1, 6.2**
 
-- [~] 2. Checkpoint - Ensure all tests pass
+- [-] 2. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 3. Wire the helpers into the Service Dialog and replace the badge
