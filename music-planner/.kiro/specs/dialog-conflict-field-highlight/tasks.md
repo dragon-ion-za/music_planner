@@ -41,11 +41,11 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
     - Compare `buildModalConflictMap` results for case-varied inputs (through `buildDraftSlots`) and canonical inputs over generated window services
     - **Validates: Requirements 6.1, 6.2**
 
-- [-] 2. Checkpoint - Ensure all tests pass
+- [x] 2. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 3. Wire the helpers into the Service Dialog and replace the badge
-  - [~] 3.1 Update `components/add-service-dialog/add-service-dialog.component.ts`
+  - [x] 3.1 Update `components/add-service-dialog/add-service-dialog.component.ts`
     - Replace `repertoireSet` with `songLookup` built from the repertoire; keep `repertoireMap` keyed by canonical number
     - Make `isUnknownSong` and `repertoireValidatorFn` use `resolveSongNumber`
     - Add `conflictWindowLoaded`: false before each fetch, true on success, false on error; in `rebuildConflictMap`, clear every `conflictStatus` and return when there is no date or the window is not loaded; otherwise use `buildDraftSlots`

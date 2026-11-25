@@ -18,8 +18,8 @@ import moment from 'moment';
 import { ServicesApiService } from '../../services/services-api.service';
 import { RepertoireEntry } from '../../models/repertoire.model';
 import { Service, SlotConflictStatus } from '../../models/service.model';
-import { buildModalConflictMap, DraftSlot } from '../../services/modal-conflict.util';
-import { buildServicePayload, normalizeSongInput, slotsFromService } from '../../services/service-form.util';
+import { buildDraftSlots, buildModalConflictMap, getSlotHighlight, SlotHighlight } from '../../services/modal-conflict.util';
+import { buildServicePayload, buildSongLookup, normalizeSongInput, resolveSongNumber, slotsFromService } from '../../services/service-form.util';
 import repertoireData from '../../../../assets/repertoire.json';
 
 export const SLOT_TEMPLATES = [
@@ -100,10 +100,12 @@ export class AddServiceDialogComponent implements OnInit {
   saving: boolean = false;
   submitError: string | null = null;
   windowServices: Service[] = [];
+  /** True only after the conflict window for the current date loaded successfully. */
+  conflictWindowLoaded: boolean = false;
 
   // --- private lookup structures ---
   protected repertoireMap = new Map<string, RepertoireEntry>();
-  repertoireSet = new Set<string>();
+  protected songLookup = new Map<string, string>();
 
   constructor(
     public dialogRef: MatDialogRef<AddServiceDialogComponent>,
@@ -119,6 +121,7 @@ export class AddServiceDialogComponent implements OnInit {
     return this.editingService !== null;
   }
 
+  // TODO(task 3.2): remove hasSong once the template no longer renders the conflict badge.
   hasSong(slot: SlotState): boolean {
     return normalizeSongInput(slot.songNumber) !== null;
   }
@@ -126,13 +129,13 @@ export class AddServiceDialogComponent implements OnInit {
   /** True when the slot holds a non-empty, non-N/A value that is not in the repertoire. */
   isUnknownSong(slot: SlotState): boolean {
     const value = normalizeSongInput(slot.songNumber);
-    return value !== null && !this.repertoireSet.has(value);
+    return value !== null && resolveSongNumber(slot.songNumber, this.songLookup) === null;
   }
 
   ngOnInit(): void {
     this.repertoire = (repertoireData as any).songs as RepertoireEntry[];
     this.repertoireMap = new Map(this.repertoire.map(e => [e.number, e]));
-    this.repertoireSet = new Set(this.repertoire.map(e => e.number));
+    this.songLookup = buildSongLookup(this.repertoire);
     this.slotStates = SLOT_TEMPLATES.map(t => ({
       ...t,
       songNumber: '',
@@ -194,8 +197,8 @@ export class AddServiceDialogComponent implements OnInit {
   repertoireValidatorFn(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const val: string = control.value ?? '';
-      if (val === '') return null;
-      return this.repertoireSet.has(val) ? null : { unknownSong: true };
+      if (normalizeSongInput(val) === null) return null;
+      return resolveSongNumber(val, this.songLookup) !== null ? null : { unknownSong: true };
     };
   }
 
@@ -203,28 +206,29 @@ export class AddServiceDialogComponent implements OnInit {
   fetchConflictWindow(date: moment.Moment): void {
     const conflictFrom = date.clone().subtract(365, 'days').format('YYYY-MM-DD');
     const conflictTo = date.clone().add(365, 'days').format('YYYY-MM-DD');
+    this.conflictWindowLoaded = false;
     this.servicesApiService.getServices(conflictFrom, conflictTo).subscribe({
       next: (services) => {
         this.windowServices = services;
+        this.conflictWindowLoaded = true;
         this.rebuildConflictMap();
       },
       error: () => {
         // Suppress conflict badges on API error — form remains usable
         this.windowServices = [];
+        this.conflictWindowLoaded = false;
         this.rebuildConflictMap();
       }
     });
   }
 
   rebuildConflictMap(): void {
-    if (!this.serviceDate) return;
+    for (const slot of this.slotStates) {
+      slot.conflictStatus = null;
+    }
+    if (!this.serviceDate || !this.conflictWindowLoaded) return;
     const serviceDateStr = this.serviceDate.format('YYYY-MM-DD');
-    const draftSlots: DraftSlot[] = this.slotStates
-      .filter(s => {
-        const n = normalizeSongInput(s.songNumber);
-        return n !== null && this.repertoireSet.has(n);
-      })
-      .map(s => ({ slotKey: s.slotKey, songNumber: normalizeSongInput(s.songNumber)! }));
+    const draftSlots = buildDraftSlots(this.slotStates, this.songLookup);
     const conflictMap = buildModalConflictMap(
       this.windowServices,
       draftSlots,
@@ -244,6 +248,7 @@ export class AddServiceDialogComponent implements OnInit {
     } else {
       // Clear all conflict statuses when date is cleared
       this.windowServices = [];
+      this.conflictWindowLoaded = false;
       for (const slot of this.slotStates) {
         slot.conflictStatus = null;
       }
@@ -251,7 +256,22 @@ export class AddServiceDialogComponent implements OnInit {
   }
 
   // --- conflict tooltip ---
+  getHighlight(slot: SlotState): SlotHighlight | null {
+    return getSlotHighlight(resolveSongNumber(slot.songNumber, this.songLookup) !== null, slot.conflictStatus);
+  }
+
+  /** Replace a resolvable input with its canonical number and refresh conflicts. */
+  onSongBlur(slot: SlotState): void {
+    const canonical = resolveSongNumber(slot.songNumber, this.songLookup);
+    if (canonical !== null) {
+      slot.songNumber = canonical;
+    }
+    this.rebuildConflictMap();
+  }
+
   getConflictTooltip(slot: SlotState): string {
+    const highlight = this.getHighlight(slot);
+    if (highlight !== 'red' && highlight !== 'yellow' && highlight !== 'green') return '';
     if (!slot.conflictStatus || !slot.conflictStatus.conflictingDates.length) return '';
     return slot.conflictStatus.conflictingDates
       .map(d => `${d.date} (${d.serviceType})`)
@@ -275,7 +295,8 @@ export class AddServiceDialogComponent implements OnInit {
     const payload = buildServicePayload(
       moment(this.serviceDate),
       this.serviceType,
-      this.slotStates
+      this.slotStates,
+      this.songLookup
     );
 
     const request$ = this.isEditMode
