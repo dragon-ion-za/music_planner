@@ -70,7 +70,7 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
     - Existing tests must still pass
     - _Requirements: 1.1-1.6, 2.1-2.5, 3.1, 3.2, 4.1-4.4, 5.4, 5.5, 7.1, 7.4, 7.5, 8.1, 8.2_
 
-- [~] 4. Final checkpoint - Ensure all tests pass
+- [-] 4. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
