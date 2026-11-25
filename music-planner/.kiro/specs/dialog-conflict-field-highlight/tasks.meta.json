@@ -95,6 +95,11 @@
         "executionId": "1535baea-f4df-4a9d-a829-104cc33de9d7",
         "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
         "timestamp": 1795636384521
+      },
+      {
+        "executionId": "1535baea-f4df-4a9d-a829-104cc33de9d7",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795639030606
       }
     ],
     "1.3 Write property tests for song resolution in `services/service-form.util.spec.ts`": [
@@ -187,6 +192,13 @@
         "executionId": "2a77acd6-da7f-4805-8ab0-865f618adbcf",
         "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
         "timestamp": 1795464794986
+      }
+    ],
+    "3. Wire the helpers into the Service Dialog and replace the badge": [
+      {
+        "executionId": "1535baea-f4df-4a9d-a829-104cc33de9d7",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795639038811
       }
     ]
   }

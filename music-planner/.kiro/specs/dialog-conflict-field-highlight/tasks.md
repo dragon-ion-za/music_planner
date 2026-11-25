@@ -44,7 +44,7 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
 - [x] 2. Checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 3. Wire the helpers into the Service Dialog and replace the badge
+- [x] 3. Wire the helpers into the Service Dialog and replace the badge
   - [x] 3.1 Update `components/add-service-dialog/add-service-dialog.component.ts`
     - Replace `repertoireSet` with `songLookup` built from the repertoire; keep `repertoireMap` keyed by canonical number
     - Make `isUnknownSong` and `repertoireValidatorFn` use `resolveSongNumber`
@@ -70,7 +70,7 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
     - Existing tests must still pass
     - _Requirements: 1.1-1.6, 2.1-2.5, 3.1, 3.2, 4.1-4.4, 5.4, 5.5, 7.1, 7.4, 7.5, 8.1, 8.2_
 
-- [-] 4. Final checkpoint - Ensure all tests pass
+- [x] 4. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
