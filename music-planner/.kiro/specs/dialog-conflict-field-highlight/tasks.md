@@ -60,7 +60,7 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
     - In `src/styles.css` (app root): add `.conflict-tooltip { white-space: pre-line; }`
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 2.1, 3.1, 3.2, 7.5_
 
-  - [~]* 3.3 Extend `components/add-service-dialog/add-service-dialog.component.spec.ts`
+  - [x]* 3.3 Extend `components/add-service-dialog/add-service-dialog.component.spec.ts`
     - Highlight classes red, yellow, green and free appear on the right `.slot-field` in add mode and edit mode, and no `.conflict-badge` exists
     - Empty, `N/A`, unknown, no-date and failed-fetch states show no highlight; Save still works after a failed fetch
     - `getConflictTooltip` lists `date (type)` per line for conflicts and `''` for free slots
