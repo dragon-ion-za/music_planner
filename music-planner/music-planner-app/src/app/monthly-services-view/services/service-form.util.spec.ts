@@ -3,6 +3,7 @@
 import fc from 'fast-check';
 import moment from 'moment';
 import { buildServicePayload, buildSongLookup, resolveSongNumber } from './service-form.util';
+import { SLOT_TEMPLATES } from '../components/add-service-dialog/add-service-dialog.component';
 import repertoireData from '../../../assets/repertoire.json';
 
 describe('buildServicePayload serviceDate', () => {
@@ -88,6 +89,49 @@ describe('resolveSongNumber properties', () => {
           const once = resolveSongNumber(s, lookup);
           expect(resolveSongNumber(once, lookup)).toBe(once);
         }),
+        { numRuns: 100 },
+      ),
+    ).not.toThrow();
+  });
+});
+
+describe('buildServicePayload properties', () => {
+  const songs: { number: string }[] = (repertoireData as { songs: { number: string }[] }).songs;
+  const lookup = buildSongLookup(songs);
+  const numbers = songs.map(s => s.number);
+  const padding = fc.array(fc.constantFrom(' ', '\t'), { maxLength: 3 }).map(a => a.join(''));
+  const flips = fc.array(fc.boolean(), { minLength: 1, maxLength: 8 });
+  const flipCase = (s: string, f: boolean[]) =>
+    [...s].map((c, i) => (f[i % f.length] ? (c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase()) : c)).join('');
+
+  type SlotInput = { text: string; canonical: string | null };
+  const slotInput: fc.Arbitrary<SlotInput> = fc.oneof(
+    fc.tuple(fc.constantFrom(...numbers), flips, padding, padding).map(([n, f, a, b]): SlotInput => ({
+      text: a + flipCase(n, f) + b,
+      canonical: n,
+    })),
+    padding.map((p): SlotInput => ({ text: p, canonical: null })),
+    fc.tuple(flips, padding, padding).map(([f, a, b]): SlotInput => ({
+      text: a + flipCase('N/A', f) + b,
+      canonical: null,
+    })),
+  );
+
+  // Feature: dialog-conflict-field-highlight, Property 4: Payload carries canonical numbers, nulls for empty slots, and 14 ordered entries
+  // **Validates: Requirements 5.6, 7.1, 7.2, 7.3**
+  it('Property 4: payload has 14 ordered entries with canonical numbers or null', () => {
+    expect(() =>
+      fc.assert(
+        fc.property(
+          fc.array(slotInput, { minLength: SLOT_TEMPLATES.length, maxLength: SLOT_TEMPLATES.length }),
+          inputs => {
+            const slots = SLOT_TEMPLATES.map((t, i) => ({ slotKey: t.slotKey, songNumber: inputs[i].text }));
+            const payload = buildServicePayload(moment(new Date(2025, 0, 5)), 'S', slots, lookup);
+            expect(payload.slots.length).toBe(14);
+            expect(payload.slots.map(s => s.slotKey)).toEqual(SLOT_TEMPLATES.map(t => t.slotKey));
+            expect(payload.slots.map(s => s.songNumber)).toEqual(inputs.map(i => i.canonical));
+          },
+        ),
         { numRuns: 100 },
       ),
     ).not.toThrow();

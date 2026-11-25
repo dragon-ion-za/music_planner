@@ -1,5 +1,10 @@
 {
-  "pbtResults": {},
+  "pbtResults": {
+    "1.4 Write property test for the payload in `services/service-form.util.spec.ts`": {
+      "status": "passed",
+      "lastRunTimestamp": 1795634460913
+    }
+  },
   "executionHistory": {
     "1.1 Add song resolution and canonical payload building in `services/service-form.util.ts`": [
       {
@@ -80,6 +85,21 @@
         "executionId": "2a77acd6-da7f-4805-8ab0-865f618adbcf",
         "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
         "timestamp": 1795464371618
+      },
+      {
+        "executionId": "2a77acd6-da7f-4805-8ab0-865f618adbcf",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795468445457
+      },
+      {
+        "executionId": "1535baea-f4df-4a9d-a829-104cc33de9d7",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795634220190
+      },
+      {
+        "executionId": "1535baea-f4df-4a9d-a829-104cc33de9d7",
+        "chatSessionId": "sess_9fc7505b-f47c-45ec-8dac-3ed8b7cd404f",
+        "timestamp": 1795634224660
       }
     ],
     "1.5 Write property test for the highlight mapping in new `services/modal-conflict.util.spec.ts`": [

@@ -27,7 +27,7 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
     - Use entries from `assets/repertoire.json`, per-character case flips, whitespace padding; at least 100 runs each; tag each test with `Feature: dialog-conflict-field-highlight, Property N: ...`
     - **Validates: Requirements 5.1, 5.2, 5.3**
 
-  - [~]* 1.4 Write property test for the payload in `services/service-form.util.spec.ts`
+  - [-]* 1.4 Write property test for the payload in `services/service-form.util.spec.ts`
     - **Property 4: Payload carries canonical numbers, nulls for empty slots, and 14 ordered entries**
     - Generate, per slot key, a case-varied repertoire number, blank text, or an `N/A` case variant
     - **Validates: Requirements 5.6, 7.1, 7.2, 7.3**
