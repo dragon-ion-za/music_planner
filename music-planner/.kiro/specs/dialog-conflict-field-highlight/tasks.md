@@ -32,11 +32,11 @@ Build the pure helpers first (song resolution, payload canonicalization, highlig
     - Generate, per slot key, a case-varied repertoire number, blank text, or an `N/A` case variant
     - **Validates: Requirements 5.6, 7.1, 7.2, 7.3**
 
-  - [-]* 1.5 Write property test for the highlight mapping in new `services/modal-conflict.util.spec.ts`
+  - [x]* 1.5 Write property test for the highlight mapping in new `services/modal-conflict.util.spec.ts`
     - **Property 5: Highlight mapping is total and follows the severity**
     - **Validates: Requirements 1.1, 1.2, 1.3, 2.1, 2.2, 2.3**
 
-  - [~]* 1.6 Write property test for case-invariant conflicts in `services/modal-conflict.util.spec.ts`
+  - [-]* 1.6 Write property test for case-invariant conflicts in `services/modal-conflict.util.spec.ts`
     - **Property 6: Conflict results do not depend on input letter case**
     - Compare `buildModalConflictMap` results for case-varied inputs (through `buildDraftSlots`) and canonical inputs over generated window services
     - **Validates: Requirements 6.1, 6.2**
